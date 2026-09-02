@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/mlamp/token-prices/main/schema/token-prices.schema.json",
+  "title": "token-prices catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "currency", "unit", "updated_at", "models"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "currency": { "type": "string", "const": "USD" },
+    "unit": { "type": "string", "const": "usd_per_million_tokens" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/model" }
+    }
+  },
+  "$defs": {
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "provider", "pricing", "as_of"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "provider": {
+          "type": "string",
+          "enum": [
+            "anthropic",
+            "openai",
+            "google",
+            "xai",
+            "meta",
+            "moonshot",
+            "deepseek",
+            "qwen",
+            "zhipu",
+            "other"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "context_window": { "type": "integer", "minimum": 1 },
+        "pricing": { "$ref": "#/$defs/pricing" },
+        "as_of": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "notes": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["current", "legacy", "preview"],
+          "default": "current"
+        }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output"],
+      "properties": {
+        "input": { "type": "number", "minimum": 0 },
+        "output": { "type": "number", "minimum": 0 },
+        "cache_read": { "type": "number", "minimum": 0 },
+        "cache_write": { "type": "number", "minimum": 0 },
+        "cache_5m_write": { "type": "number", "minimum": 0 },
+        "cache_1h_write": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

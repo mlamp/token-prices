@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "unit": "usd_per_million_tokens",
+  "updated_at": "2026-09-02T00:00:00Z",
+  "models": [
+    {
+      "id": "claude-opus-5",
+      "provider": "anthropic",
+      "aliases": ["opus-5", "opus", "claude-opus-5-0"],
+      "context_window": 1000000,
+      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-opus-4.8",
+      "provider": "anthropic",
+      "aliases": ["opus-4.8", "opus-4-8", "claude-opus-4-8"],
+      "context_window": 1000000,
+      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "provider": "anthropic",
+      "aliases": ["sonnet-5", "sonnet", "claude-sonnet-5-0"],
+      "context_window": 1000000,
+      "pricing": { "input": 2.0, "output": 10.0, "cache_read": 0.2 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-sonnet-4.6",
+      "provider": "anthropic",
+      "aliases": ["sonnet-4.6", "sonnet-4-6", "claude-sonnet-4-6"],
+      "context_window": 1000000,
+      "pricing": { "input": 3.0, "output": 15.0, "cache_read": 0.3 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-haiku-4.5",
+      "provider": "anthropic",
+      "aliases": ["haiku", "haiku-4.5", "haiku-4-5", "claude-haiku-4-5", "claude-haiku-4-5-20251001"],
+      "context_window": 200000,
+      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-fable-5",
+      "provider": "anthropic",
+      "aliases": ["fable-5", "fable", "claude-fable-5-0"],
+      "context_window": 1000000,
+      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 1.0 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "claude-fable-5.1",
+      "provider": "anthropic",
+      "aliases": ["fable-5.1", "fable-5-1", "claude-fable-5-1", "fable[1m]"],
+      "context_window": 1000000,
+      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 0.25 },
+      "as_of": "2026-09-01",
+      "notes": "Same list input/output as fable-5; cache_read 75% cheaper",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "provider": "openai",
+      "aliases": ["luna", "5.6-luna"],
+      "context_window": 1100000,
+      "pricing": { "input": 0.2, "output": 1.2, "cache_read": 0.02 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "provider": "openai",
+      "aliases": ["terra", "5.6-terra"],
+      "context_window": 1100000,
+      "pricing": { "input": 1.0, "output": 6.0, "cache_read": 0.1 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "provider": "openai",
+      "aliases": ["sol", "5.6-sol"],
+      "context_window": 1100000,
+      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.4",
+      "provider": "openai",
+      "aliases": ["5.4"],
+      "context_window": 1100000,
+      "pricing": { "input": 1.25, "output": 7.5, "cache_read": 0.125 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "provider": "openai",
+      "aliases": ["5.4-mini"],
+      "context_window": 400000,
+      "pricing": { "input": 0.75, "output": 4.5, "cache_read": 0.075 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gpt-5.3-codex",
+      "provider": "openai",
+      "aliases": ["5.3-codex", "codex"],
+      "context_window": 400000,
+      "pricing": { "input": 1.75, "output": 14.0, "cache_read": 0.175 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "chat-latest-07012026",
+      "provider": "openai",
+      "aliases": ["chat-latest"],
+      "pricing": { "input": 5.0, "output": 30.0, "cache_read": 0.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "glm-5.3",
+      "provider": "zhipu",
+      "aliases": ["glm5.3"],
+      "context_window": 1000000,
+      "pricing": { "input": 1.2, "output": 3.96, "cache_read": 0.12 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "glm-5.3-flash",
+      "provider": "zhipu",
+      "aliases": ["glm5.3-flash"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.071, "output": 0.24, "cache_read": 0.01 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "glm-5.2",
+      "provider": "zhipu",
+      "aliases": ["glm5.2"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.4, "output": 1.26, "cache_read": 0.06 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "glm-4.7",
+      "provider": "zhipu",
+      "aliases": ["glm4.7"],
+      "context_window": 203000,
+      "pricing": { "input": 0.4, "output": 1.75, "cache_read": 0.08 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "aliases": ["v4-pro", "deepseek-pro"],
+      "context_window": 1000000,
+      "pricing": { "input": 1.04, "output": 2.08, "cache_read": 0.044 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "provider": "deepseek",
+      "aliases": ["v4-flash-vision", "deepseek-v4-flash-vision"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.44, "output": 1.32, "cache_read": 0.014 },
+      "as_of": "2026-09-01",
+      "status": "preview"
+    },
+    {
+      "id": "deepseek-v3.2",
+      "provider": "deepseek",
+      "aliases": ["v3.2", "deepseek-v3-2"],
+      "context_window": 164000,
+      "pricing": { "input": 0.21, "output": 0.31, "cache_read": 0.022 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "qwen3.8-flash",
+      "provider": "qwen",
+      "aliases": ["qwen-3.8-flash"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.15, "output": 0.47, "cache_read": 0.016 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "qwen3.8-27b",
+      "provider": "qwen",
+      "aliases": ["qwen-3.8-27b"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.35, "output": 0.9, "cache_read": 0.035 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "qwen3.8-max",
+      "provider": "qwen",
+      "aliases": ["qwen-3.8-max"],
+      "context_window": 1000000,
+      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.25 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "qwen3.8-2.4t-a95b",
+      "provider": "qwen",
+      "aliases": ["qwen-3.8-2.4t"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.9, "output": 0.9, "cache_read": 0.25 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "qwen3.7-flash",
+      "provider": "qwen",
+      "aliases": ["qwen-3.7-flash"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.03, "output": 0.13, "cache_read": 0.006 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "kimi-k3",
+      "provider": "moonshot",
+      "aliases": ["k3", "kimi-k3-1m"],
+      "context_window": 1000000,
+      "pricing": { "input": 2.85, "output": 14.25, "cache_read": 0.3 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "provider": "moonshot",
+      "aliases": ["k2.7-code", "kimi-k2.7", "k3-256k"],
+      "context_window": 262000,
+      "pricing": { "input": 0.66, "output": 3.4, "cache_read": 0.16 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "kimi-k2.5",
+      "provider": "moonshot",
+      "aliases": ["k2.5"],
+      "context_window": 262000,
+      "pricing": { "input": 0.45, "output": 2.25, "cache_read": 0.07 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "grok-4.5",
+      "provider": "xai",
+      "aliases": ["grok4.5"],
+      "context_window": 500000,
+      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.3 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "grok-4.6",
+      "provider": "xai",
+      "aliases": ["grok4.6"],
+      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "grok-4.20-beta",
+      "provider": "xai",
+      "aliases": ["grok-4.20", "grok4.20"],
+      "context_window": 2000000,
+      "pricing": { "input": 1.25, "output": 2.5, "cache_read": 0.2 },
+      "as_of": "2026-09-01",
+      "status": "preview"
+    },
+    {
+      "id": "grok-4.3",
+      "provider": "xai",
+      "aliases": ["grok4.3"],
+      "context_window": 1000000,
+      "pricing": { "input": 1.25, "output": 2.5, "cache_read": 0.2 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "grok-4-fast",
+      "provider": "xai",
+      "aliases": ["grok-fast"],
+      "context_window": 2000000,
+      "pricing": { "input": 0.2, "output": 0.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "grok-code-fast-1",
+      "provider": "xai",
+      "aliases": ["grok-code-fast"],
+      "context_window": 256000,
+      "pricing": { "input": 0.2, "output": 1.5 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gemini-3.7-flash",
+      "provider": "google",
+      "aliases": ["gemini-3.7", "gem-3.7-flash"],
+      "pricing": { "input": 0.375, "output": 1.88, "cache_read": 0.038 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gemini-3.6-flash",
+      "provider": "google",
+      "aliases": ["gemini-3.6"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.375, "output": 1.88, "cache_read": 0.038 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "aliases": ["gemini-3.1-pro", "gemini-3.1"],
+      "context_window": 1000000,
+      "pricing": { "input": 1.0, "output": 6.0, "cache_read": 0.1 },
+      "as_of": "2026-09-01",
+      "status": "preview"
+    },
+    {
+      "id": "gemini-3-pro-preview",
+      "provider": "google",
+      "aliases": ["gemini-3-pro"],
+      "context_window": 1000000,
+      "pricing": { "input": 2.0, "output": 12.0 },
+      "as_of": "2026-09-01",
+      "status": "legacy"
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "provider": "google",
+      "aliases": ["gemini-3.5"],
+      "context_window": 1000000,
+      "pricing": { "input": 1.5, "output": 9.0, "cache_read": 0.15 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "provider": "google",
+      "aliases": ["gemini-3.5-lite", "gemini-flash-lite"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.3, "output": 2.5, "cache_read": 0.03 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "gemma-4-31b-it",
+      "provider": "google",
+      "aliases": ["gemma-4-31b", "gemma4"],
+      "context_window": 262000,
+      "pricing": { "input": 0.09, "output": 0.34, "cache_read": 0.012 },
+      "as_of": "2026-09-01",
+      "notes": "Open weights; hosted list price",
+      "status": "current"
+    },
+    {
+      "id": "llama-4-scout",
+      "provider": "meta",
+      "aliases": ["llama4-scout", "scout"],
+      "context_window": 10000000,
+      "pricing": { "input": 0.11, "output": 0.34 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "llama-4-maverick",
+      "provider": "meta",
+      "aliases": ["llama4-maverick", "maverick"],
+      "context_window": 1000000,
+      "pricing": { "input": 0.2, "output": 0.8 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "llama-3.3-70b",
+      "provider": "meta",
+      "aliases": ["llama-3.3-70b-instruct", "llama3.3-70b"],
+      "context_window": 131000,
+      "pricing": { "input": 0.1, "output": 0.32 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    },
+    {
+      "id": "llama-3.1-8b",
+      "provider": "meta",
+      "aliases": ["llama-3.1-8b-instruct", "llama3.1-8b"],
+      "context_window": 131000,
+      "pricing": { "input": 0.05, "output": 0.08 },
+      "as_of": "2026-09-01",
+      "status": "current"
+    }
+  ]
+}
