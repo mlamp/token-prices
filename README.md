@@ -11,7 +11,7 @@ pages and aggregators; they drift. Prefer vendor pages when they disagree.
 Stable tagged file:
 
 ```text
-https://raw.githubusercontent.com/mlamp/token-prices/v0.1.0/prices/current.json
+https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/prices/current.json
 ```
 
 Or `main` for the moving tip (may change without a tag).
