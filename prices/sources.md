@@ -12,6 +12,7 @@ As of 2026-09-01 / 2026-09-02:
 Official vendor pages (preferred when they disagree with aggregators):
 
 - https://www.anthropic.com/pricing
+- Anthropic prompt caching (5m / 1h write rates): https://platform.claude.com/docs/en/build-with-claude/prompt-caching
 - https://openai.com/api/pricing/
 - https://ai.google.dev/pricing
 - https://x.ai/api

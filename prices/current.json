@@ -2,15 +2,15 @@
   "schema_version": 1,
   "currency": "USD",
   "unit": "usd_per_million_tokens",
-  "updated_at": "2026-09-02T00:00:00Z",
+  "updated_at": "2026-09-02T08:00:00Z",
   "models": [
     {
       "id": "claude-opus-5",
       "provider": "anthropic",
       "aliases": ["opus-5", "opus", "claude-opus-5-0"],
       "context_window": 1000000,
-      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_5m_write": 6.25, "cache_1h_write": 10.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -18,8 +18,8 @@
       "provider": "anthropic",
       "aliases": ["opus-4.8", "opus-4-8", "claude-opus-4-8"],
       "context_window": 1000000,
-      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_5m_write": 6.25, "cache_1h_write": 10.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -27,8 +27,8 @@
       "provider": "anthropic",
       "aliases": ["sonnet-5", "sonnet", "claude-sonnet-5-0"],
       "context_window": 1000000,
-      "pricing": { "input": 2.0, "output": 10.0, "cache_read": 0.2 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 2.0, "output": 10.0, "cache_read": 0.2, "cache_5m_write": 2.5, "cache_1h_write": 4.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -36,8 +36,8 @@
       "provider": "anthropic",
       "aliases": ["sonnet-4.6", "sonnet-4-6", "claude-sonnet-4-6"],
       "context_window": 1000000,
-      "pricing": { "input": 3.0, "output": 15.0, "cache_read": 0.3 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 3.0, "output": 15.0, "cache_read": 0.3, "cache_5m_write": 3.75, "cache_1h_write": 6.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -45,8 +45,8 @@
       "provider": "anthropic",
       "aliases": ["haiku", "haiku-4.5", "haiku-4-5", "claude-haiku-4-5", "claude-haiku-4-5-20251001"],
       "context_window": 200000,
-      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1, "cache_5m_write": 1.25, "cache_1h_write": 2.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -54,8 +54,8 @@
       "provider": "anthropic",
       "aliases": ["fable-5", "fable", "claude-fable-5-0"],
       "context_window": 1000000,
-      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 1.0 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 1.0, "cache_5m_write": 12.5, "cache_1h_write": 20.0 },
+      "as_of": "2026-09-02",
       "status": "current"
     },
     {
@@ -63,8 +63,8 @@
       "provider": "anthropic",
       "aliases": ["fable-5.1", "fable-5-1", "claude-fable-5-1", "fable[1m]"],
       "context_window": 1000000,
-      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 0.25 },
-      "as_of": "2026-09-01",
+      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 0.25, "cache_5m_write": 12.5, "cache_1h_write": 20.0 },
+      "as_of": "2026-09-02",
       "notes": "Same list input/output as fable-5; cache_read 75% cheaper",
       "status": "current"
     },
