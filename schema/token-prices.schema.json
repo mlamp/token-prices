@@ -50,7 +50,8 @@
         "id": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "description": "Prefer the documented first-party API model ID, preserving provider punctuation and any snapshot suffix. Hosted entries may use a developer-scoped catalog ID; record the exact serving endpoint in aliases/provenance. Retain former catalog IDs as aliases when renaming."
         },
         "provider": {
           "type": "string",
@@ -75,7 +76,8 @@
             "type": "string",
             "minLength": 1
           },
-          "uniqueItems": true
+          "uniqueItems": true,
+          "description": "Case-insensitive catalog lookup names: official endpoint aliases, short names, and former catalog IDs. Not every alias is an API endpoint. Generic names follow the current model; version-specific names remain attached to their version."
         },
         "context_window": {
           "type": "integer",

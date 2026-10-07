@@ -9,12 +9,12 @@ First-party global/international list rates are preferred. Hosted-only entries u
 | Model | Source | Serving provider | Region / scope | Verified | Conditions |
 | --- | --- | --- | --- | --- | --- |
 | `claude-opus-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-opus-4.8` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-opus-4-8` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `claude-sonnet-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-sonnet-4.6` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-haiku-4.5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-sonnet-4-6` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-haiku-4-5-20251001` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `claude-fable-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-fable-5.1` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-fable-5-1` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `gpt-5.6-luna` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `gpt-5.6-terra` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `gpt-5.6-sol` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
@@ -57,8 +57,8 @@ First-party global/international list rates are preferred. Hosted-only entries u
 | `gpt-5.5-pro` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `gpt-5.4-nano` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `gpt-5.4-pro` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
-| `claude-opus-5.5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-sonnet-5.5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-opus-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-sonnet-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `deepseek-v4.1-flash` | [Pricing](https://api-docs.deepseek.com/quick_start/pricing/) | deepseek | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `glm-5.3-flashx` | [Pricing](https://docs.z.ai/guides/overview/pricing) | Z.AI | international API | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `glm-4.7-flashx` | [Pricing](https://docs.z.ai/guides/overview/pricing) | Z.AI | international API | 2026-10-07 | Regular USD list prices; text input and text output. |
@@ -86,7 +86,7 @@ First-party global/international list rates are preferred. Hosted-only entries u
 
 OpenAI context and IDs: [model catalog](https://developers.openai.com/api/docs/models); model-specific pages linked below. GPT-5.5 Pro Batch/Flex long-context cells are unavailable and those services stop at 272,000 input tokens. Batch/Flex/Fast/Ultrafast rates are transcribed independently from the complete [pricing markdown](https://developers.openai.com/api/docs/pricing.md). Fast replaces the former Priority name. Astra Ultrafast permits global processing and US residency; other regional residency is unavailable. Regional/FedRAMP uplifts are excluded. GPT-5.6 Sol has a promotional label without a separately published undiscounted rate; its published table rates are used and that exception is noted.
 
-Claude IDs, context and active status: [models](https://platform.claude.com/docs/en/models/overview), [deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations). Batch/cache multipliers and Opus Fast rates are documented on the pricing page. Generic opus, sonnet and fable aliases follow the current models; version aliases remain attached to their versions.
+Claude IDs, context and active status: [models](https://platform.claude.com/docs/en/models/overview), [deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations). Batch/cache multipliers and Opus Fast rates are documented on the pricing page. Primary Anthropic IDs use the exact documented Claude API IDs, including the dated Haiku snapshot. Generic opus, sonnet and fable aliases follow the current models; version aliases and former dotted catalog IDs remain attached to their versions. See the [catalog naming convention](../README.md#model-ids-and-aliases).
 
 DeepSeek [pricing and redirects](https://api-docs.deepseek.com/quick_start/pricing/) identifies `deepseek-flash` as V4.1 Flash, including the former V4 Flash Vision endpoint. V4 Pro serves V4-Pro-0813. Peak rates are the baseline; off-peak is 50% cheaper.
 
