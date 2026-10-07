@@ -4,23 +4,48 @@
   "title": "token-prices catalog",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "currency", "unit", "updated_at", "models"],
+  "required": [
+    "schema_version",
+    "currency",
+    "unit",
+    "updated_at",
+    "models"
+  ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
-    "currency": { "type": "string", "const": "USD" },
-    "unit": { "type": "string", "const": "usd_per_million_tokens" },
-    "updated_at": { "type": "string", "format": "date-time" },
+    "schema_version": {
+      "type": "integer",
+      "const": 2
+    },
+    "currency": {
+      "type": "string",
+      "const": "USD"
+    },
+    "unit": {
+      "type": "string",
+      "const": "usd_per_million_tokens"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "models": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/model" }
+      "items": {
+        "$ref": "#/$defs/model"
+      }
     }
   },
   "$defs": {
     "model": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "provider", "pricing", "as_of"],
+      "required": [
+        "id",
+        "provider",
+        "pricing",
+        "as_of"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -39,37 +64,122 @@
             "deepseek",
             "qwen",
             "zhipu",
+            "mistral",
+            "cohere",
             "other"
           ]
         },
         "aliases": {
           "type": "array",
-          "items": { "type": "string", "minLength": 1 },
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
           "uniqueItems": true
         },
-        "context_window": { "type": "integer", "minimum": 1 },
-        "pricing": { "$ref": "#/$defs/pricing" },
-        "as_of": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-        "notes": { "type": "string" },
+        "context_window": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pricing": {
+          "$ref": "#/$defs/pricing"
+        },
+        "as_of": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "notes": {
+          "type": "string"
+        },
         "status": {
           "type": "string",
-          "enum": ["current", "legacy", "preview"],
+          "enum": [
+            "current",
+            "legacy",
+            "preview"
+          ],
           "default": "current"
+        },
+        "pricing_tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/pricing_tier"
+          }
         }
       }
     },
     "pricing": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["input", "output"],
+      "required": [
+        "input",
+        "output"
+      ],
       "properties": {
-        "input": { "type": "number", "minimum": 0 },
-        "output": { "type": "number", "minimum": 0 },
-        "cache_read": { "type": "number", "minimum": 0 },
-        "cache_write": { "type": "number", "minimum": 0 },
-        "cache_5m_write": { "type": "number", "minimum": 0 },
-        "cache_1h_write": { "type": "number", "minimum": 0 }
+        "input": {
+          "type": "number",
+          "minimum": 0
+        },
+        "output": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cache_read": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cache_write": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cache_5m_write": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cache_1h_write": {
+          "type": "number",
+          "minimum": 0
+        }
       }
+    },
+    "pricing_tier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service_tier",
+        "input_tokens_min",
+        "input_tokens_max",
+        "pricing"
+      ],
+      "properties": {
+        "service_tier": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "batch",
+            "flex",
+            "priority",
+            "fast",
+            "ultrafast"
+          ]
+        },
+        "input_tokens_min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "input_tokens_max": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "pricing": {
+          "$ref": "#/$defs/pricing"
+        }
+      },
+      "description": "Inclusive input-token pricing bands. Null upper bound means no upper pricing boundary. Bands must not overlap within a service tier. A standard band starting at zero must exactly match flat pricing. Cache fields never inherit."
     }
   }
 }

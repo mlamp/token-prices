@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
+from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,20 +17,6 @@ SCAN_PATHS = [
     ROOT / "README.md",
     ROOT / "prices" / "sources.md",
 ]
-
-PROVIDERS = {
-    "anthropic",
-    "openai",
-    "google",
-    "xai",
-    "meta",
-    "moonshot",
-    "deepseek",
-    "qwen",
-    "zhipu",
-    "other",
-}
-STATUSES = {"current", "legacy", "preview"}
 
 # Public-repo PII / secret residue. Fail closed on hits in scanned text files.
 PII_PATTERNS = [
@@ -55,64 +43,110 @@ def load_catalog() -> dict:
         fail(f"catalog JSON: {e}")
 
 
-def check_shape(doc: dict) -> None:
-    if doc.get("schema_version") != 1:
-        fail("schema_version must be 1")
-    if doc.get("currency") != "USD":
-        fail("currency must be USD")
-    if doc.get("unit") != "usd_per_million_tokens":
-        fail("unit must be usd_per_million_tokens")
-    if not isinstance(doc.get("updated_at"), str) or not doc["updated_at"]:
-        fail("updated_at required")
-    models = doc.get("models")
-    if not isinstance(models, list) or not models:
-        fail("models must be a non-empty array")
+def check_schema(value, spec: dict, schema: dict, path: str) -> None:
+    """Apply the JSON Schema keywords used by this catalog, without dependencies."""
+    if "$ref" in spec:
+        check_schema(value, schema["$defs"][spec["$ref"].split("/")[-1]], schema, path)
+        return
+    types = spec.get("type", [])
+    if isinstance(types, str):
+        types = [types]
+    matches = {
+        "object": isinstance(value, dict),
+        "array": isinstance(value, list),
+        "string": isinstance(value, str),
+        "integer": type(value) is int,
+        "number": type(value) in (int, float) and (type(value) is int or math.isfinite(value)),
+        "null": value is None,
+    }
+    if types and not any(matches[t] for t in types):
+        fail(f"{path}: expected {' or '.join(types)}")
+    if "const" in spec and (type(value) is not type(spec["const"]) or value != spec["const"]):
+        fail(f"{path}: must be {spec['const']!r}")
+    if "enum" in spec and value not in spec["enum"]:
+        fail(f"{path}: invalid value {value!r}")
+    if type(value) in (int, float) and value < spec.get("minimum", -math.inf):
+        fail(f"{path}: below minimum {spec['minimum']}")
+    if isinstance(value, str):
+        if len(value) < spec.get("minLength", 0):
+            fail(f"{path}: empty string")
+        if "pattern" in spec and not re.fullmatch(spec["pattern"], value):
+            fail(f"{path}: invalid format")
+        if spec.get("format") == "date-time":
+            try:
+                parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                if "T" not in value or parsed.tzinfo is None:
+                    raise ValueError
+            except ValueError:
+                fail(f"{path}: expected date-time with timezone")
+    if isinstance(value, dict):
+        for key in spec.get("required", []):
+            if key not in value:
+                fail(f"{path}: missing {key}")
+        props = spec.get("properties", {})
+        for key, item in value.items():
+            if key in props:
+                check_schema(item, props[key], schema, f"{path}.{key}")
+            elif spec.get("additionalProperties") is False:
+                fail(f"{path}: unknown field {key}")
+    if isinstance(value, list):
+        if len(value) < spec.get("minItems", 0):
+            fail(f"{path}: too few items")
+        if spec.get("uniqueItems") and any(item in value[:i] for i, item in enumerate(value)):
+            fail(f"{path}: duplicate items")
+        for i, item in enumerate(value):
+            check_schema(item, spec["items"], schema, f"{path}[{i}]")
 
+
+def check_shape(doc: dict) -> None:
+    if not SCHEMA.is_file():
+        fail(f"missing schema {SCHEMA}")
+    schema = json.loads(SCHEMA.read_text())
+    check_schema(doc, schema, schema, "catalog")
+    # Register all IDs first so collisions are independent of model order.
     ids: set[str] = set()
-    aliases: dict[str, str] = {}
-    for i, m in enumerate(models):
-        if not isinstance(m, dict):
-            fail(f"models[{i}] not an object")
-        mid = m.get("id")
-        if not isinstance(mid, str) or not re.match(r"^[a-z0-9][a-z0-9._-]*$", mid):
-            fail(f"models[{i}].id invalid: {mid!r}")
+    for model in doc["models"]:
+        mid = model["id"]
         if mid in ids:
             fail(f"duplicate id {mid}")
         ids.add(mid)
-        if m.get("provider") not in PROVIDERS:
-            fail(f"{mid}: bad provider {m.get('provider')!r}")
-        pricing = m.get("pricing")
-        if not isinstance(pricing, dict):
-            fail(f"{mid}: pricing required")
-        for k in ("input", "output"):
-            if not isinstance(pricing.get(k), (int, float)) or pricing[k] < 0:
-                fail(f"{mid}: pricing.{k} must be number >= 0")
-        for k in ("cache_read", "cache_write", "cache_5m_write", "cache_1h_write"):
-            if k in pricing and (not isinstance(pricing[k], (int, float)) or pricing[k] < 0):
-                fail(f"{mid}: pricing.{k} must be number >= 0")
-        if not re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", str(m.get("as_of", ""))):
-            fail(f"{mid}: as_of must be YYYY-MM-DD")
-        status = m.get("status", "current")
-        if status not in STATUSES:
-            fail(f"{mid}: bad status {status!r}")
-        if "context_window" in m:
-            cw = m["context_window"]
-            if not isinstance(cw, int) or cw < 1:
-                fail(f"{mid}: context_window must be integer >= 1")
-        for a in m.get("aliases") or []:
-            if not isinstance(a, str) or not a:
-                fail(f"{mid}: empty alias")
-            key = a.lower()
-            if key in aliases and aliases[key] != mid:
-                fail(f"alias {a!r} claimed by {aliases[key]} and {mid}")
+    aliases: dict[str, str] = {}
+    for model in doc["models"]:
+        mid = model["id"]
+        try:
+            date.fromisoformat(model["as_of"])
+        except ValueError:
+            fail(f"{mid}: as_of must be a valid date")
+        local_aliases: set[str] = set()
+        for alias in model.get("aliases", []):
+            key = alias.lower()
+            if key in local_aliases:
+                fail(f"{mid}: duplicate alias {alias!r}")
+            local_aliases.add(key)
             if key in ids and key != mid:
-                fail(f"alias {a!r} collides with id {key}")
+                fail(f"alias {alias!r} collides with id {key}")
+            if key in aliases and aliases[key] != mid:
+                fail(f"alias {alias!r} claimed by {aliases[key]} and {mid}")
             aliases[key] = mid
-            if key == mid:
-                continue
-            # id itself need not be listed as alias
-    if not SCHEMA.is_file():
-        fail(f"missing schema {SCHEMA}")
+        if "pricing_tiers" not in model:
+            continue
+        standard = [t for t in model["pricing_tiers"]
+                    if t["service_tier"] == "standard" and t["input_tokens_min"] == 0]
+        if len(standard) != 1:
+            fail(f"{mid}: tiers require exactly one standard band starting at zero")
+        if model["pricing"] != standard[0]["pricing"]:
+            fail(f"{mid}: flat pricing must equal the standard band starting at zero")
+        bands: dict[str, list] = {}
+        for tier in model["pricing_tiers"]:
+            lower, upper = tier["input_tokens_min"], tier["input_tokens_max"]
+            if upper is not None and upper < lower:
+                fail(f"{mid}: reversed pricing band")
+            bands.setdefault(tier["service_tier"], []).append((lower, upper))
+        for service, ranges in bands.items():
+            ranges.sort(key=lambda r: r[0])
+            for (_, upper), (lower, _) in zip(ranges, ranges[1:]):
+                if upper is None or lower <= upper:
+                    fail(f"{mid}: overlapping {service} pricing bands")
 
 
 def scan_pii() -> None:
