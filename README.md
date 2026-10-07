@@ -35,8 +35,8 @@ Each model has `id`, `provider`, optional `aliases` / `context_window`, and
 
 `schema_version` is `2`. `status` is `current` | `legacy` | `preview`.
 `provider` supports OpenAI, Anthropic, Google, xAI, Meta, Moonshot, DeepSeek,
-Qwen, Zhipu, Mistral, Cohere, and `other`. Catalog IDs can be normalized names;
-use the documented endpoint names in aliases or provenance for API requests.
+Qwen, Zhipu, Mistral, Cohere, and `other`. See the
+[ID and alias convention](#model-ids-and-aliases) when matching model names.
 `provider` identifies the model developer; hosted prices and served context
 limits are attributed to the serving provider in [provenance](prices/sources.md).
 `as_of` is per-model verification, while `updated_at` records the catalog edit.
@@ -83,6 +83,30 @@ off-peak discounts, regional premiums, cache storage and tool charges are
 explained in notes/provenance rather than silently applied. GPT-5.6 Sol uses
 the published promotional table rates because its source supplies no separate
 undiscounted rate; that exception is recorded in its notes.
+
+## Model IDs and aliases
+
+Use a provider’s documented first-party API model ID as the primary `id` when
+available, preserving its punctuation. Anthropic uses `claude-opus-5-5` and
+`claude-fable-5-1`; OpenAI uses `gpt-6.1-sol`. Do not convert every period to a
+hyphen. When an entry represents a documented dated snapshot, use that full
+snapshot ID, such as `claude-haiku-4-5-20251001`.
+
+`aliases` includes provider endpoint aliases, short names, and former catalog
+IDs for compatibility. Resolve a name against `id` and `aliases`
+case-insensitively. For example, `claude-opus-5.5`, `opus-5.5`, `opus-5-5`, and
+`opus` resolve to `claude-opus-5-5`. Aliases are catalog lookup names; some short
+or historical spellings are not accepted in provider API requests.
+
+Generic family aliases follow the current model. Version-specific aliases
+remain attached to that version. After a documented endpoint redirect, its
+old name resolves to the model actually served, with the arrangement recorded
+in [provenance](prices/sources.md).
+
+Hosted entries can use a developer-scoped catalog ID when the serving endpoint
+is host-specific or contains characters outside the schema’s ID pattern. Use
+the exact endpoint name documented in aliases/provenance for those requests.
+Unverified historical entries retain their prior IDs and explicit notes.
 
 ## Validate
 

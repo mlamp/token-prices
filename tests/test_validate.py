@@ -197,7 +197,7 @@ class CatalogTests(unittest.TestCase):
                          {'openai', 'anthropic', 'google', 'xai', 'meta', 'moonshot',
                           'deepseek', 'qwen', 'zhipu', 'mistral', 'cohere'})
         expected = {'deepseek-v4.1-flash': (.3, 1.2, .006),
-                    'claude-opus-5.5': (4, 20, .2),
+                    'claude-opus-5-5': (4, 20, .2),
                     'mistral-large-4': (1.36, 4.18, .14),
                     'glm-5.3': (1.4, 4.4, .26)}
         for mid, rates in expected.items():
@@ -208,8 +208,8 @@ class CatalogTests(unittest.TestCase):
 
     def test_redirects_and_generic_aliases(self):
         aliases = {a.lower(): m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
-        expected = {'sol': 'gpt-6.1-sol', 'opus': 'claude-opus-5.5',
-                    'sonnet': 'claude-sonnet-5.5', 'fable': 'claude-fable-5.1',
+        expected = {'sol': 'gpt-6.1-sol', 'opus': 'claude-opus-5-5',
+                    'sonnet': 'claude-sonnet-5-5', 'fable': 'claude-fable-5-1',
                     'deepseek-v4-flash-vision-exp': 'deepseek-v4.1-flash',
                     'grok-code-fast-1': 'grok-build-0.1', 'grok-4-fast': 'grok-4.3',
                     'llama-4-maverick': 'gemma-4-31b-it'}
@@ -217,6 +217,33 @@ class CatalogTests(unittest.TestCase):
             self.assertEqual(aliases[alias], mid)
             self.assertNotIn(alias, self.models)
         self.assertEqual(aliases['5.6-sol'], 'gpt-5.6-sol')
+
+    def test_anthropic_api_ids_and_legacy_alias_compatibility(self):
+        expected = {
+            'claude-opus-5', 'claude-opus-4-8', 'claude-sonnet-5',
+            'claude-sonnet-4-6', 'claude-haiku-4-5-20251001',
+            'claude-fable-5', 'claude-fable-5-1',
+            'claude-opus-5-5', 'claude-sonnet-5-5',
+        }
+        self.assertEqual({m['id'] for m in self.doc['models']
+                          if m['provider'] == 'anthropic'}, expected)
+        names = {name.lower(): m['id'] for m in self.doc['models']
+                 for name in [m['id']] + m.get('aliases', [])}
+        legacy = {
+            'claude-opus-4.8': 'claude-opus-4-8',
+            'claude-sonnet-4.6': 'claude-sonnet-4-6',
+            'claude-haiku-4.5': 'claude-haiku-4-5-20251001',
+            'claude-haiku-4-5': 'claude-haiku-4-5-20251001',
+            'claude-fable-5.1': 'claude-fable-5-1',
+            'claude-opus-5.5': 'claude-opus-5-5',
+            'claude-sonnet-5.5': 'claude-sonnet-5-5',
+            'opus-5-5': 'claude-opus-5-5',
+            'fable-5-1': 'claude-fable-5-1',
+        }
+        for alias, mid in legacy.items():
+            with self.subTest(alias=alias):
+                self.assertEqual(names[alias], mid)
+        self.assertEqual(names['gpt-6.1-sol'], 'gpt-6.1-sol')
 
     def test_failed_verification_keeps_dates_and_notes(self):
         for mid in ['kimi-k3', 'kimi-k2.7-code', 'kimi-k2.5',

@@ -2,7 +2,7 @@
   "schema_version": 2,
   "currency": "USD",
   "unit": "usd_per_million_tokens",
-  "updated_at": "2026-10-07T00:00:00Z",
+  "updated_at": "2026-10-07T18:16:45Z",
   "models": [
     {
       "id": "claude-opus-5",
@@ -61,12 +61,12 @@
       ]
     },
     {
-      "id": "claude-opus-4.8",
+      "id": "claude-opus-4-8",
       "provider": "anthropic",
       "aliases": [
         "opus-4.8",
         "opus-4-8",
-        "claude-opus-4-8"
+        "claude-opus-4.8"
       ],
       "context_window": 1000000,
       "pricing": {
@@ -162,12 +162,12 @@
       ]
     },
     {
-      "id": "claude-sonnet-4.6",
+      "id": "claude-sonnet-4-6",
       "provider": "anthropic",
       "aliases": [
         "sonnet-4.6",
         "sonnet-4-6",
-        "claude-sonnet-4-6"
+        "claude-sonnet-4.6"
       ],
       "context_window": 1000000,
       "pricing": {
@@ -207,14 +207,14 @@
       ]
     },
     {
-      "id": "claude-haiku-4.5",
+      "id": "claude-haiku-4-5-20251001",
       "provider": "anthropic",
       "aliases": [
         "haiku",
         "haiku-4.5",
         "haiku-4-5",
         "claude-haiku-4-5",
-        "claude-haiku-4-5-20251001"
+        "claude-haiku-4.5"
       ],
       "context_window": 200000,
       "pricing": {
@@ -298,14 +298,14 @@
       ]
     },
     {
-      "id": "claude-fable-5.1",
+      "id": "claude-fable-5-1",
       "provider": "anthropic",
       "aliases": [
         "fable-5.1",
         "fable-5-1",
-        "claude-fable-5-1",
         "fable[1m]",
-        "fable"
+        "fable",
+        "claude-fable-5.1"
       ],
       "context_window": 1000000,
       "pricing": {
@@ -2555,7 +2555,7 @@
       }
     },
     {
-      "id": "claude-opus-5.5",
+      "id": "claude-opus-5-5",
       "provider": "anthropic",
       "as_of": "2026-10-07",
       "status": "current",
@@ -2570,7 +2570,8 @@
       "aliases": [
         "opus",
         "opus-5.5",
-        "claude-opus-5-5"
+        "claude-opus-5.5",
+        "opus-5-5"
       ],
       "pricing_tiers": [
         {
@@ -2612,7 +2613,7 @@
       ]
     },
     {
-      "id": "claude-sonnet-5.5",
+      "id": "claude-sonnet-5-5",
       "provider": "anthropic",
       "as_of": "2026-10-07",
       "status": "current",
@@ -2627,7 +2628,8 @@
       "aliases": [
         "sonnet",
         "sonnet-5.5",
-        "claude-sonnet-5-5"
+        "claude-sonnet-5.5",
+        "sonnet-5-5"
       ],
       "pricing_tiers": [
         {
