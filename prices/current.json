@@ -1,421 +1,3178 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "currency": "USD",
   "unit": "usd_per_million_tokens",
-  "updated_at": "2026-09-02T08:00:00Z",
+  "updated_at": "2026-10-07T00:00:00Z",
   "models": [
     {
       "id": "claude-opus-5",
       "provider": "anthropic",
-      "aliases": ["opus-5", "opus", "claude-opus-5-0"],
+      "aliases": [
+        "opus-5",
+        "claude-opus-5-0"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_5m_write": 6.25, "cache_1h_write": 10.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 5.0,
+        "output": 25.0,
+        "cache_read": 0.5,
+        "cache_5m_write": 6.25,
+        "cache_1h_write": 10.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.5,
+            "cache_5m_write": 6.25,
+            "cache_1h_write": 10.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 12.5,
+            "cache_read": 0.25,
+            "cache_5m_write": 3.125,
+            "cache_1h_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 50.0,
+            "cache_read": 1.0,
+            "cache_5m_write": 12.5,
+            "cache_1h_write": 20.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-opus-4.8",
       "provider": "anthropic",
-      "aliases": ["opus-4.8", "opus-4-8", "claude-opus-4-8"],
+      "aliases": [
+        "opus-4.8",
+        "opus-4-8",
+        "claude-opus-4-8"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_5m_write": 6.25, "cache_1h_write": 10.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 5.0,
+        "output": 25.0,
+        "cache_read": 0.5,
+        "cache_5m_write": 6.25,
+        "cache_1h_write": 10.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.5,
+            "cache_5m_write": 6.25,
+            "cache_1h_write": 10.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 12.5,
+            "cache_read": 0.25,
+            "cache_5m_write": 3.125,
+            "cache_1h_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 50.0,
+            "cache_read": 1.0,
+            "cache_5m_write": 12.5,
+            "cache_1h_write": 20.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-sonnet-5",
       "provider": "anthropic",
-      "aliases": ["sonnet-5", "sonnet", "claude-sonnet-5-0"],
+      "aliases": [
+        "sonnet-5",
+        "claude-sonnet-5-0"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 2.0, "output": 10.0, "cache_read": 0.2, "cache_5m_write": 2.5, "cache_1h_write": 4.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.2,
+        "cache_5m_write": 2.5,
+        "cache_1h_write": 4.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.2,
+            "cache_5m_write": 2.5,
+            "cache_1h_write": 4.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_5m_write": 1.25,
+            "cache_1h_write": 2.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-sonnet-4.6",
       "provider": "anthropic",
-      "aliases": ["sonnet-4.6", "sonnet-4-6", "claude-sonnet-4-6"],
+      "aliases": [
+        "sonnet-4.6",
+        "sonnet-4-6",
+        "claude-sonnet-4-6"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 3.0, "output": 15.0, "cache_read": 0.3, "cache_5m_write": 3.75, "cache_1h_write": 6.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 3.0,
+        "output": 15.0,
+        "cache_read": 0.3,
+        "cache_5m_write": 3.75,
+        "cache_1h_write": 6.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 3.0,
+            "output": 15.0,
+            "cache_read": 0.3,
+            "cache_5m_write": 3.75,
+            "cache_1h_write": 6.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 7.5,
+            "cache_read": 0.15,
+            "cache_5m_write": 1.875,
+            "cache_1h_write": 3.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-haiku-4.5",
       "provider": "anthropic",
-      "aliases": ["haiku", "haiku-4.5", "haiku-4-5", "claude-haiku-4-5", "claude-haiku-4-5-20251001"],
+      "aliases": [
+        "haiku",
+        "haiku-4.5",
+        "haiku-4-5",
+        "claude-haiku-4-5",
+        "claude-haiku-4-5-20251001"
+      ],
       "context_window": 200000,
-      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1, "cache_5m_write": 1.25, "cache_1h_write": 2.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 1.0,
+        "output": 5.0,
+        "cache_read": 0.1,
+        "cache_5m_write": 1.25,
+        "cache_1h_write": 2.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_5m_write": 1.25,
+            "cache_1h_write": 2.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.5,
+            "output": 2.5,
+            "cache_read": 0.05,
+            "cache_5m_write": 0.625,
+            "cache_1h_write": 1.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-fable-5",
       "provider": "anthropic",
-      "aliases": ["fable-5", "fable", "claude-fable-5-0"],
+      "aliases": [
+        "fable-5",
+        "claude-fable-5-0"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 1.0, "cache_5m_write": 12.5, "cache_1h_write": 20.0 },
-      "as_of": "2026-09-02",
-      "status": "current"
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cache_read": 1.0,
+        "cache_5m_write": 12.5,
+        "cache_1h_write": 20.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 50.0,
+            "cache_read": 1.0,
+            "cache_5m_write": 12.5,
+            "cache_1h_write": 20.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.5,
+            "cache_5m_write": 6.25,
+            "cache_1h_write": 10.0
+          }
+        }
+      ]
     },
     {
       "id": "claude-fable-5.1",
       "provider": "anthropic",
-      "aliases": ["fable-5.1", "fable-5-1", "claude-fable-5-1", "fable[1m]"],
+      "aliases": [
+        "fable-5.1",
+        "fable-5-1",
+        "claude-fable-5-1",
+        "fable[1m]",
+        "fable"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 10.0, "output": 50.0, "cache_read": 0.25, "cache_5m_write": 12.5, "cache_1h_write": 20.0 },
-      "as_of": "2026-09-02",
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cache_read": 0.25,
+        "cache_5m_write": 12.5,
+        "cache_1h_write": 20.0
+      },
+      "as_of": "2026-10-07",
       "notes": "Same list input/output as fable-5; cache_read 75% cheaper",
-      "status": "current"
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 50.0,
+            "cache_read": 0.25,
+            "cache_5m_write": 12.5,
+            "cache_1h_write": 20.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.125,
+            "cache_5m_write": 6.25,
+            "cache_1h_write": 10.0
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.6-luna",
       "provider": "openai",
-      "aliases": ["luna", "5.6-luna"],
-      "context_window": 1100000,
-      "pricing": { "input": 0.2, "output": 1.2, "cache_read": 0.02 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "5.6-luna"
+      ],
+      "context_window": 1050000,
+      "pricing": {
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "cache_write": 0.25
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.2,
+            "output": 1.2,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.4,
+            "output": 1.8,
+            "cache_read": 0.04,
+            "cache_write": 0.5
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.6,
+            "cache_read": 0.01,
+            "cache_write": 0.125
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.2,
+            "output": 0.9,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.6,
+            "cache_read": 0.01,
+            "cache_write": 0.125
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.2,
+            "output": 0.9,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.4,
+            "output": 2.4,
+            "cache_read": 0.04,
+            "cache_write": 0.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.8,
+            "output": 3.6,
+            "cache_read": 0.08,
+            "cache_write": 1.0
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.6-terra",
       "provider": "openai",
-      "aliases": ["terra", "5.6-terra"],
-      "context_window": 1100000,
-      "pricing": { "input": 1.0, "output": 6.0, "cache_read": 0.1 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "terra",
+        "5.6-terra"
+      ],
+      "context_window": 1050000,
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "cache_read": 0.2,
+        "cache_write": 2.5
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.0,
+            "output": 12.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 18.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 6.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 9.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 6.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 9.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 4.0,
+            "output": 24.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 8.0,
+            "output": 36.0,
+            "cache_read": 0.8,
+            "cache_write": 10.0
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.6-sol",
       "provider": "openai",
-      "aliases": ["sol", "5.6-sol"],
-      "context_window": 1100000,
-      "pricing": { "input": 1.0, "output": 5.0, "cache_read": 0.1 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "5.6-sol"
+      ],
+      "context_window": 1050000,
+      "pricing": {
+        "input": 4.0,
+        "output": 20.0,
+        "cache_read": 0.4,
+        "cache_write": 5.0
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request. Published table labels these rates promotional through at least 2026-11-21; no separate undiscounted rate is supplied.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 4.0,
+            "output": 20.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 8.0,
+            "output": 30.0,
+            "cache_read": 0.8,
+            "cache_write": 10.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 15.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 15.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 8.0,
+            "output": 40.0,
+            "cache_read": 0.8,
+            "cache_write": 10.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 16.0,
+            "output": 60.0,
+            "cache_read": 1.6,
+            "cache_write": 20.0
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.4",
       "provider": "openai",
-      "aliases": ["5.4"],
-      "context_window": 1100000,
-      "pricing": { "input": 1.25, "output": 7.5, "cache_read": 0.125 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "5.4"
+      ],
+      "context_window": 1050000,
+      "pricing": {
+        "input": 2.5,
+        "output": 15.0,
+        "cache_read": 0.25
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.5,
+            "output": 15.0,
+            "cache_read": 0.25
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 22.5,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.25,
+            "output": 7.5,
+            "cache_read": 0.13
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 11.25,
+            "cache_read": 0.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.25,
+            "output": 7.5,
+            "cache_read": 0.13
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 11.25,
+            "cache_read": 0.25
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 5.0,
+            "output": 30.0,
+            "cache_read": 0.5
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.4-mini",
       "provider": "openai",
-      "aliases": ["5.4-mini"],
+      "aliases": [
+        "5.4-mini"
+      ],
       "context_window": 400000,
-      "pricing": { "input": 0.75, "output": 4.5, "cache_read": 0.075 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 4.5,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.375,
+            "output": 2.25,
+            "cache_read": 0.0375
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.375,
+            "output": 2.25,
+            "cache_read": 0.0375
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 9.0,
+            "cache_read": 0.15
+          }
+        }
+      ]
     },
     {
       "id": "gpt-5.3-codex",
       "provider": "openai",
-      "aliases": ["5.3-codex", "codex"],
+      "aliases": [
+        "5.3-codex"
+      ],
       "context_window": 400000,
-      "pricing": { "input": 1.75, "output": 14.0, "cache_read": 0.175 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 1.75,
+        "output": 14.0,
+        "cache_read": 0.175
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.75,
+            "output": 14.0,
+            "cache_read": 0.175
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 3.5,
+            "output": 28.0,
+            "cache_read": 0.35
+          }
+        }
+      ]
     },
     {
       "id": "chat-latest-07012026",
       "provider": "openai",
-      "aliases": ["chat-latest"],
-      "pricing": { "input": 5.0, "output": 30.0, "cache_read": 0.5 },
+      "aliases": [],
+      "pricing": {
+        "input": 5.0,
+        "output": 30.0,
+        "cache_read": 0.5
+      },
       "as_of": "2026-09-01",
-      "status": "current"
+      "status": "current",
+      "notes": "Verification incomplete on 2026-10-07: official model documentation lists only the rolling chat-latest endpoint, not this snapshot. Retained dated entry; generic alias moved to the verified rolling endpoint."
     },
     {
       "id": "glm-5.3",
       "provider": "zhipu",
-      "aliases": ["glm5.3"],
+      "aliases": [
+        "glm5.3"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 1.2, "output": 3.96, "cache_read": 0.12 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices."
     },
     {
       "id": "glm-5.3-flash",
       "provider": "zhipu",
-      "aliases": ["glm5.3-flash"],
+      "aliases": [
+        "glm5.3-flash"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.071, "output": 0.24, "cache_read": 0.01 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 0.15,
+        "output": 0.5,
+        "cache_read": 0.03
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices."
     },
     {
       "id": "glm-5.2",
       "provider": "zhipu",
-      "aliases": ["glm5.2"],
+      "aliases": [
+        "glm5.2"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.4, "output": 1.26, "cache_read": 0.06 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices."
     },
     {
       "id": "glm-4.7",
       "provider": "zhipu",
-      "aliases": ["glm4.7"],
-      "context_window": 203000,
-      "pricing": { "input": 0.4, "output": 1.75, "cache_read": 0.08 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "glm4.7"
+      ],
+      "context_window": 200000,
+      "pricing": {
+        "input": 0.6,
+        "output": 2.2,
+        "cache_read": 0.11
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices."
     },
     {
       "id": "deepseek-v4-pro",
       "provider": "deepseek",
-      "aliases": ["v4-pro", "deepseek-pro"],
+      "aliases": [
+        "v4-pro",
+        "deepseek-pro"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 1.04, "output": 2.08, "cache_read": 0.044 },
-      "as_of": "2026-09-01",
-      "status": "current"
-    },
-    {
-      "id": "deepseek-v4-flash-vision-exp",
-      "provider": "deepseek",
-      "aliases": ["v4-flash-vision", "deepseek-v4-flash-vision"],
-      "context_window": 1000000,
-      "pricing": { "input": 0.44, "output": 1.32, "cache_read": 0.014 },
-      "as_of": "2026-09-01",
-      "status": "preview"
+      "pricing": {
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.044
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Serves DeepSeek-V4-Pro-0813. Peak list price; off-peak rates are 50% lower and are not structured."
     },
     {
       "id": "deepseek-v3.2",
       "provider": "deepseek",
-      "aliases": ["v3.2", "deepseek-v3-2"],
-      "context_window": 164000,
-      "pricing": { "input": 0.21, "output": 0.31, "cache_read": 0.022 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "v3.2",
+        "deepseek-v3-2",
+        "deepseek-ai/DeepSeek-V3.2"
+      ],
+      "context_window": 163840,
+      "pricing": {
+        "input": 0.26,
+        "output": 0.38,
+        "cache_read": 0.13
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Hosted endpoint: deepseek-ai/DeepSeek-V3.2. Context is the served API limit.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.26,
+            "output": 0.38,
+            "cache_read": 0.13
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.208,
+            "output": 0.304,
+            "cache_read": 0.104
+          }
+        }
+      ]
     },
     {
       "id": "qwen3.8-flash",
       "provider": "qwen",
-      "aliases": ["qwen-3.8-flash"],
+      "aliases": [
+        "qwen-3.8-flash"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.15, "output": 0.47, "cache_read": 0.016 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 0.113,
+        "output": 0.382
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache read omitted when the public documentation defers the model-specific rate to the console. Explicit cache write/storage charges are not represented."
     },
     {
       "id": "qwen3.8-27b",
       "provider": "qwen",
-      "aliases": ["qwen-3.8-27b"],
+      "aliases": [
+        "qwen-3.8-27b"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.35, "output": 0.9, "cache_read": 0.035 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.1
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache read omitted when the public documentation defers the model-specific rate to the console. Explicit cache write/storage charges are not represented."
     },
     {
       "id": "qwen3.8-max",
       "provider": "qwen",
-      "aliases": ["qwen-3.8-max"],
+      "aliases": [
+        "qwen-3.8-max",
+        "qwen3.8-max-0902"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.25 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 1.65,
+        "output": 4.951
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache read omitted when the public documentation defers the model-specific rate to the console. Explicit cache write/storage charges are not represented."
     },
     {
       "id": "qwen3.8-2.4t-a95b",
       "provider": "qwen",
-      "aliases": ["qwen-3.8-2.4t"],
+      "aliases": [
+        "qwen-3.8-2.4t"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.9, "output": 0.9, "cache_read": 0.25 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 2,
+        "output": 6
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Cache read omitted when the public documentation defers the model-specific rate to the console. Explicit cache write/storage charges are not represented."
     },
     {
       "id": "qwen3.7-flash",
       "provider": "qwen",
-      "aliases": ["qwen-3.7-flash"],
+      "aliases": [
+        "qwen-3.7-flash",
+        "qwen3.7-flash-2026-07-15"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 0.03, "output": 0.13, "cache_read": 0.006 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 0.028,
+        "output": 0.11,
+        "cache_read": 0.0056
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Implicit cache read is 20% of input. Explicit cache writes/storage excluded.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 32000,
+          "pricing": {
+            "input": 0.028,
+            "output": 0.11,
+            "cache_read": 0.0056
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 32001,
+          "input_tokens_max": 256000,
+          "pricing": {
+            "input": 0.083,
+            "output": 0.33,
+            "cache_read": 0.0166
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 256001,
+          "input_tokens_max": 1000000,
+          "pricing": {
+            "input": 0.165,
+            "output": 0.66,
+            "cache_read": 0.033
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 32000,
+          "pricing": {
+            "input": 0.014,
+            "output": 0.055
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 32001,
+          "input_tokens_max": 256000,
+          "pricing": {
+            "input": 0.0415,
+            "output": 0.165
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 256001,
+          "input_tokens_max": 1000000,
+          "pricing": {
+            "input": 0.0825,
+            "output": 0.33
+          }
+        }
+      ]
     },
     {
       "id": "kimi-k3",
       "provider": "moonshot",
-      "aliases": ["k3", "kimi-k3-1m"],
+      "aliases": [
+        "k3",
+        "kimi-k3-1m"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 2.85, "output": 14.25, "cache_read": 0.3 },
+      "pricing": {
+        "input": 2.85,
+        "output": 14.25,
+        "cache_read": 0.3
+      },
       "as_of": "2026-09-01",
-      "status": "current"
+      "status": "current",
+      "notes": "Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified."
     },
     {
       "id": "kimi-k2.7-code",
       "provider": "moonshot",
-      "aliases": ["k2.7-code", "kimi-k2.7", "k3-256k"],
+      "aliases": [
+        "k2.7-code",
+        "kimi-k2.7",
+        "k3-256k"
+      ],
       "context_window": 262000,
-      "pricing": { "input": 0.66, "output": 3.4, "cache_read": 0.16 },
+      "pricing": {
+        "input": 0.66,
+        "output": 3.4,
+        "cache_read": 0.16
+      },
       "as_of": "2026-09-01",
-      "status": "current"
+      "status": "current",
+      "notes": "Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified."
     },
     {
       "id": "kimi-k2.5",
       "provider": "moonshot",
-      "aliases": ["k2.5"],
+      "aliases": [
+        "k2.5"
+      ],
       "context_window": 262000,
-      "pricing": { "input": 0.45, "output": 2.25, "cache_read": 0.07 },
+      "pricing": {
+        "input": 0.45,
+        "output": 2.25,
+        "cache_read": 0.07
+      },
       "as_of": "2026-09-01",
-      "status": "current"
+      "status": "current",
+      "notes": "Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified."
     },
     {
       "id": "grok-4.5",
       "provider": "xai",
-      "aliases": ["grok4.5"],
+      "aliases": [
+        "grok4.5",
+        "grok-4.5-latest",
+        "grok-build-latest"
+      ],
       "context_window": 500000,
-      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.3 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 2.0,
+        "output": 6.0,
+        "cache_read": 0.3
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 2.0,
+            "output": 6.0,
+            "cache_read": 0.3
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 12.0,
+            "cache_read": 0.6
+          }
+        }
+      ]
     },
     {
       "id": "grok-4.6",
       "provider": "xai",
-      "aliases": ["grok4.6"],
-      "pricing": { "input": 2.0, "output": 6.0, "cache_read": 0.5 },
-      "as_of": "2026-09-01",
-      "status": "current"
-    },
-    {
-      "id": "grok-4.20-beta",
-      "provider": "xai",
-      "aliases": ["grok-4.20", "grok4.20"],
-      "context_window": 2000000,
-      "pricing": { "input": 1.25, "output": 2.5, "cache_read": 0.2 },
-      "as_of": "2026-09-01",
-      "status": "preview"
+      "aliases": [
+        "grok4.6"
+      ],
+      "pricing": {
+        "input": 2.0,
+        "output": 6.0,
+        "cache_read": 0.5
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "context_window": 500000,
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 2.0,
+            "output": 6.0,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 12.0,
+            "cache_read": 1.0
+          }
+        }
+      ]
     },
     {
       "id": "grok-4.3",
       "provider": "xai",
-      "aliases": ["grok4.3"],
+      "aliases": [
+        "grok4.3",
+        "grok-4.3-latest",
+        "grok-4-fast",
+        "grok-fast",
+        "grok-4-1-fast-reasoning",
+        "grok-4-1-fast-non-reasoning",
+        "grok-4-fast-reasoning",
+        "grok-4-fast-non-reasoning",
+        "grok-4-0709",
+        "grok-3"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 1.25, "output": 2.5, "cache_read": 0.2 },
-      "as_of": "2026-09-01",
-      "status": "current"
-    },
-    {
-      "id": "grok-4-fast",
-      "provider": "xai",
-      "aliases": ["grok-fast"],
-      "context_window": 2000000,
-      "pricing": { "input": 0.2, "output": 0.5 },
-      "as_of": "2026-09-01",
-      "status": "current"
-    },
-    {
-      "id": "grok-code-fast-1",
-      "provider": "xai",
-      "aliases": ["grok-code-fast"],
-      "context_window": 256000,
-      "pricing": { "input": 0.2, "output": 1.5 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "pricing": {
+        "input": 1.25,
+        "output": 2.5,
+        "cache_read": 0.2
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table. Retired fast endpoints redirect here; old endpoint prices no longer apply.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 1.25,
+            "output": 2.5,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 5.0,
+            "cache_read": 0.4
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 1.0,
+            "output": 2.0,
+            "cache_read": 0.16
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 4.0,
+            "cache_read": 0.32
+          }
+        }
+      ]
     },
     {
       "id": "gemini-3.7-flash",
       "provider": "google",
-      "aliases": ["gemini-3.7", "gem-3.7-flash"],
-      "pricing": { "input": 0.375, "output": 1.88, "cache_read": 0.038 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "gemini-3.7",
+        "gem-3.7-flash"
+      ],
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "context_window": 1048576,
+      "notes": "Regular baseline effective 2027-01-01. Through 2026-12-31 token rates are discounted 50%; promotion is not structured. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 7.5,
+            "cache_read": 0.15
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.7,
+            "output": 13.5,
+            "cache_read": 0.27
+          }
+        }
+      ]
     },
     {
       "id": "gemini-3.6-flash",
       "provider": "google",
-      "aliases": ["gemini-3.6"],
-      "context_window": 1000000,
-      "pricing": { "input": 0.375, "output": 1.88, "cache_read": 0.038 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "gemini-3.6"
+      ],
+      "context_window": 1048576,
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Regular baseline effective 2027-01-01. Through 2026-12-31 token rates are discounted 50%; promotion is not structured. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 7.5,
+            "cache_read": 0.15
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.7,
+            "output": 13.5,
+            "cache_read": 0.27
+          }
+        }
+      ]
     },
     {
       "id": "gemini-3.1-pro-preview",
       "provider": "google",
-      "aliases": ["gemini-3.1-pro", "gemini-3.1"],
-      "context_window": 1000000,
-      "pricing": { "input": 1.0, "output": 6.0, "cache_read": 0.1 },
-      "as_of": "2026-09-01",
-      "status": "preview"
+      "aliases": [
+        "gemini-3.1-pro",
+        "gemini-3.1"
+      ],
+      "context_window": 1048576,
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2
+      },
+      "as_of": "2026-10-07",
+      "status": "preview",
+      "notes": "Text rates; reasoning output included. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 200000,
+          "pricing": {
+            "input": 2,
+            "output": 12,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 200000,
+          "pricing": {
+            "input": 1,
+            "output": 6,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 200001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2,
+            "output": 9,
+            "cache_read": 0.4
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 200000,
+          "pricing": {
+            "input": 1,
+            "output": 6,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 200001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2,
+            "output": 9,
+            "cache_read": 0.4
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": 200000,
+          "pricing": {
+            "input": 3.6,
+            "output": 21.6,
+            "cache_read": 0.36
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 200001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 7.2,
+            "output": 32.4,
+            "cache_read": 0.72
+          }
+        }
+      ]
     },
     {
       "id": "gemini-3-pro-preview",
       "provider": "google",
-      "aliases": ["gemini-3-pro"],
+      "aliases": [
+        "gemini-3-pro"
+      ],
       "context_window": 1000000,
-      "pricing": { "input": 2.0, "output": 12.0 },
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0
+      },
       "as_of": "2026-09-01",
-      "status": "legacy"
+      "status": "legacy",
+      "notes": "Retired 2026-03-09; historical rates retained. Pricing verification incomplete on 2026-10-07: removed from current pricing page."
     },
     {
       "id": "gemini-3.5-flash",
       "provider": "google",
-      "aliases": ["gemini-3.5"],
-      "context_window": 1000000,
-      "pricing": { "input": 1.5, "output": 9.0, "cache_read": 0.15 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "gemini-3.5"
+      ],
+      "context_window": 1048576,
+      "pricing": {
+        "input": 1.5,
+        "output": 9,
+        "cache_read": 0.15
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Text input/output rates. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 9,
+            "cache_read": 0.15
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 4.5,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 4.5,
+            "cache_read": 0.08
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.7,
+            "output": 16.2,
+            "cache_read": 0.27
+          }
+        }
+      ]
     },
     {
       "id": "gemini-3.5-flash-lite",
       "provider": "google",
-      "aliases": ["gemini-3.5-lite", "gemini-flash-lite"],
-      "context_window": 1000000,
-      "pricing": { "input": 0.3, "output": 2.5, "cache_read": 0.03 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "gemini-3.5-lite",
+        "gemini-flash-lite"
+      ],
+      "context_window": 1048576,
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.03
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Text input/output rates. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.3,
+            "output": 2.5,
+            "cache_read": 0.03
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.15,
+            "output": 1.25,
+            "cache_read": 0.02
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.15,
+            "output": 1.25,
+            "cache_read": 0.02
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.54,
+            "output": 4.5,
+            "cache_read": 0.05
+          }
+        }
+      ]
     },
     {
       "id": "gemma-4-31b-it",
       "provider": "google",
-      "aliases": ["gemma-4-31b", "gemma4"],
-      "context_window": 262000,
-      "pricing": { "input": 0.09, "output": 0.34, "cache_read": 0.012 },
-      "as_of": "2026-09-01",
-      "notes": "Open weights; hosted list price",
-      "status": "current"
+      "aliases": [
+        "gemma-4-31b",
+        "gemma4",
+        "google/gemma-4-31B-it-turbo",
+        "llama-4-maverick",
+        "llama4-maverick",
+        "maverick",
+        "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"
+      ],
+      "context_window": 262144,
+      "pricing": {
+        "input": 0.09,
+        "output": 0.34,
+        "cache_read": 0.05
+      },
+      "as_of": "2026-10-07",
+      "notes": "Hosted endpoint: google/gemma-4-31B-it-turbo. Context is the served API limit. DeepInfra retired its Maverick endpoint and redirects it to this Gemma Turbo endpoint.",
+      "status": "current",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.09,
+            "output": 0.34,
+            "cache_read": 0.05
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.135,
+            "output": 0.51,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.072,
+            "output": 0.272,
+            "cache_read": 0.04
+          }
+        }
+      ]
     },
     {
       "id": "llama-4-scout",
       "provider": "meta",
-      "aliases": ["llama4-scout", "scout"],
-      "context_window": 10000000,
-      "pricing": { "input": 0.11, "output": 0.34 },
-      "as_of": "2026-09-01",
-      "status": "current"
-    },
-    {
-      "id": "llama-4-maverick",
-      "provider": "meta",
-      "aliases": ["llama4-maverick", "maverick"],
-      "context_window": 1000000,
-      "pricing": { "input": 0.2, "output": 0.8 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "llama4-scout",
+        "scout",
+        "meta-llama/Llama-4-Scout-17B-16E-Instruct"
+      ],
+      "context_window": 327680,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.3
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Hosted endpoint: meta-llama/Llama-4-Scout-17B-16E-Instruct. Context is the served API limit.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.3
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.15,
+            "output": 0.45
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.08,
+            "output": 0.24
+          }
+        }
+      ]
     },
     {
       "id": "llama-3.3-70b",
       "provider": "meta",
-      "aliases": ["llama-3.3-70b-instruct", "llama3.3-70b"],
-      "context_window": 131000,
-      "pricing": { "input": 0.1, "output": 0.32 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "llama-3.3-70b-instruct",
+        "llama3.3-70b",
+        "meta-llama/Llama-3.3-70B-Instruct-Turbo"
+      ],
+      "context_window": 131072,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.32
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Hosted endpoint: meta-llama/Llama-3.3-70B-Instruct-Turbo. Context is the served API limit.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.32
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.08,
+            "output": 0.256
+          }
+        }
+      ]
     },
     {
       "id": "llama-3.1-8b",
       "provider": "meta",
-      "aliases": ["llama-3.1-8b-instruct", "llama3.1-8b"],
-      "context_window": 131000,
-      "pricing": { "input": 0.05, "output": 0.08 },
-      "as_of": "2026-09-01",
-      "status": "current"
+      "aliases": [
+        "llama-3.1-8b-instruct",
+        "llama3.1-8b",
+        "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+      ],
+      "context_window": 131072,
+      "pricing": {
+        "input": 0.02,
+        "output": 0.04
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Hosted endpoint: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Context is the served API limit.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.02,
+            "output": 0.04
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.016,
+            "output": 0.032
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-astra",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "6-astra",
+        "astra"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 10.0,
+            "output": 50.0,
+            "cache_read": 1.0,
+            "cache_write": 12.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 20.0,
+            "output": 75.0,
+            "cache_read": 2.0,
+            "cache_write": 25.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.5,
+            "cache_write": 6.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 37.5,
+            "cache_read": 1.0,
+            "cache_write": 12.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 5.0,
+            "output": 25.0,
+            "cache_read": 0.5,
+            "cache_write": 6.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 37.5,
+            "cache_read": 1.0,
+            "cache_write": 12.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 20.0,
+            "output": 100.0,
+            "cache_read": 2.0,
+            "cache_write": 25.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 40.0,
+            "output": 150.0,
+            "cache_read": 4.0,
+            "cache_write": 50.0
+          }
+        },
+        {
+          "service_tier": "ultrafast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 60.0,
+            "output": 300.0,
+            "cache_read": 6.0,
+            "cache_write": 75.0
+          }
+        },
+        {
+          "service_tier": "ultrafast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 120.0,
+            "output": 450.0,
+            "cache_read": 12.0,
+            "cache_write": 150.0
+          }
+        }
+      ],
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cache_read": 1.0,
+        "cache_write": 12.5
+      }
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "6.1-sol",
+        "sol",
+        "codex"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.1,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 15.0,
+            "cache_read": 0.2,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.05,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 7.5,
+            "cache_read": 0.1,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.05,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 7.5,
+            "cache_read": 0.1,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 4.0,
+            "output": 20.0,
+            "cache_read": 0.2,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 8.0,
+            "output": 30.0,
+            "cache_read": 0.4,
+            "cache_write": 10.0
+          }
+        }
+      ],
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "cache_write": 2.5
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "6-sol"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 15.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 7.5,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 7.5,
+            "cache_read": 0.2,
+            "cache_write": 2.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 4.0,
+            "output": 20.0,
+            "cache_read": 0.4,
+            "cache_write": 5.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 8.0,
+            "output": 30.0,
+            "cache_read": 0.8,
+            "cache_write": 10.0
+          }
+        }
+      ],
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.2,
+        "cache_write": 2.5
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "6-luna",
+        "luna"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.5,
+            "cache_read": 0.01,
+            "cache_write": 0.125
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.2,
+            "output": 0.75,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.05,
+            "output": 0.25,
+            "cache_read": 0.005,
+            "cache_write": 0.0625
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.375,
+            "cache_read": 0.01,
+            "cache_write": 0.125
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.05,
+            "output": 0.25,
+            "cache_read": 0.005,
+            "cache_write": 0.0625
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.375,
+            "cache_read": 0.01,
+            "cache_write": 0.125
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 0.2,
+            "output": 1.0,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.4,
+            "output": 1.5,
+            "cache_read": 0.04,
+            "cache_write": 0.5
+          }
+        }
+      ],
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125
+      }
+    },
+    {
+      "id": "gpt-5.5",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "5.5"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 5.0,
+            "output": 30.0,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 10.0,
+            "output": 45.0,
+            "cache_read": 1.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.5,
+            "output": 15.0,
+            "cache_read": 0.25
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 22.5,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 2.5,
+            "output": 15.0,
+            "cache_read": 0.25
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 5.0,
+            "output": 22.5,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 12.5,
+            "output": 75.0,
+            "cache_read": 1.25
+          }
+        }
+      ],
+      "pricing": {
+        "input": 5.0,
+        "output": 30.0,
+        "cache_read": 0.5
+      }
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "5.5-pro"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 30.0,
+            "output": 180.0
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 60.0,
+            "output": 270.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 15.0,
+            "output": 90.0
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 15.0,
+            "output": 90.0
+          }
+        }
+      ],
+      "pricing": {
+        "input": 30.0,
+        "output": 180.0
+      }
+    },
+    {
+      "id": "gpt-5.4-nano",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "5.4-nano"
+      ],
+      "context_window": 400000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.2,
+            "output": 1.25,
+            "cache_read": 0.02
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.625,
+            "cache_read": 0.01
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.625,
+            "cache_read": 0.01
+          }
+        }
+      ],
+      "pricing": {
+        "input": 0.2,
+        "output": 1.25,
+        "cache_read": 0.02
+      }
+    },
+    {
+      "id": "gpt-5.4-pro",
+      "provider": "openai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "aliases": [
+        "5.4-pro"
+      ],
+      "context_window": 1050000,
+      "notes": "Global processing. Regional/FedRAMP uplifts excluded. Long-context band applies to the full request.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 30.0,
+            "output": 180.0
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 60.0,
+            "output": 270.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 15.0,
+            "output": 90.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 30.0,
+            "output": 135.0
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": 272000,
+          "pricing": {
+            "input": 15.0,
+            "output": 90.0
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 272001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 30.0,
+            "output": 135.0
+          }
+        }
+      ],
+      "pricing": {
+        "input": 30.0,
+        "output": 180.0
+      }
+    },
+    {
+      "id": "claude-opus-5.5",
+      "provider": "anthropic",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.2,
+        "cache_5m_write": 5,
+        "cache_1h_write": 8
+      },
+      "context_window": 1000000,
+      "aliases": [
+        "opus",
+        "opus-5.5",
+        "claude-opus-5-5"
+      ],
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4,
+            "output": 20,
+            "cache_read": 0.2,
+            "cache_5m_write": 5,
+            "cache_1h_write": 8
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 10.0,
+            "cache_read": 0.1,
+            "cache_5m_write": 2.5,
+            "cache_1h_write": 4.0
+          }
+        },
+        {
+          "service_tier": "fast",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 8.0,
+            "output": 40.0,
+            "cache_read": 0.4,
+            "cache_5m_write": 10.0,
+            "cache_1h_write": 16.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "provider": "anthropic",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_5m_write": 2.5,
+        "cache_1h_write": 4
+      },
+      "context_window": 1000000,
+      "aliases": [
+        "sonnet",
+        "sonnet-5.5",
+        "claude-sonnet-5-5"
+      ],
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2,
+            "output": 10,
+            "cache_read": 0.2,
+            "cache_5m_write": 2.5,
+            "cache_1h_write": 4
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_5m_write": 1.25,
+            "cache_1h_write": 2.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "provider": "deepseek",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
+      },
+      "context_window": 1000000,
+      "aliases": [
+        "deepseek-flash",
+        "deepseek-v4-flash",
+        "deepseek-v4-flash-vision-exp",
+        "v4-flash-vision",
+        "deepseek-v4-flash-vision"
+      ],
+      "notes": "Flash endpoints redirect to V4.1 Flash. Peak list price; off-peak rates are 50% lower and are not structured."
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "provider": "zhipu",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.37,
+        "output": 1.25,
+        "cache_read": 0.075
+      },
+      "context_window": 1000000,
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices.",
+      "aliases": []
+    },
+    {
+      "id": "glm-4.7-flashx",
+      "provider": "zhipu",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.07,
+        "output": 0.4,
+        "cache_read": 0.01
+      },
+      "context_window": 200000,
+      "notes": "Cache storage is temporarily free; storage charges are not token write prices.",
+      "aliases": []
+    },
+    {
+      "id": "grok-4.7",
+      "provider": "xai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 2.0,
+        "output": 6.0,
+        "cache_read": 0.5
+      },
+      "context_window": 500000,
+      "aliases": [],
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 2.0,
+            "output": 6.0,
+            "cache_read": 0.5
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 4.0,
+            "output": 12.0,
+            "cache_read": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "grok-4.20-0309-reasoning",
+      "provider": "xai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 1.25,
+        "output": 2.5,
+        "cache_read": 0.2
+      },
+      "context_window": 1000000,
+      "aliases": [
+        "grok-4.20-beta",
+        "grok-4.20",
+        "grok4.20",
+        "grok-4.20-reasoning-latest",
+        "grok-4.20-reasoning",
+        "grok-4.20-0309",
+        "grok-4.20-beta-0309-reasoning",
+        "grok-4.20-beta-0309",
+        "grok-4.20-beta-latest",
+        "grok-4.20-beta-latest-reasoning",
+        "grok-4.20-beta-reasoning",
+        "grok-4.20-experimental-beta-0304-reasoning",
+        "grok-4.20-experimental-beta-0304",
+        "grok-4.20-experimental-beta-reasoning-latest",
+        "grok-4.20-experimental-beta-latest",
+        "grok-4.20-reasoning-gv2"
+      ],
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 1.25,
+            "output": 2.5,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.5,
+            "output": 5.0,
+            "cache_read": 0.4
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 1.0,
+            "output": 2.0,
+            "cache_read": 0.16
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 4.0,
+            "cache_read": 0.32
+          }
+        }
+      ]
+    },
+    {
+      "id": "grok-build-0.1",
+      "provider": "xai",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 1.0,
+        "output": 2.0,
+        "cache_read": 0.2
+      },
+      "context_window": 256000,
+      "aliases": [
+        "grok-code-fast-1",
+        "grok-code-fast",
+        "grok-code-fast-1-0825"
+      ],
+      "notes": "Higher rates apply to the full request at 200,000 prompt tokens. Pricing source is the provider markdown table.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 199999,
+          "pricing": {
+            "input": 1.0,
+            "output": 2.0,
+            "cache_read": 0.2
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 200000,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.0,
+            "output": 4.0,
+            "cache_read": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "provider": "google",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
+      },
+      "context_window": 1048576,
+      "notes": "Regular baseline effective 2027-01-01. Through 2026-12-31 token rates are discounted 50%; promotion is not structured. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 1.5,
+            "output": 7.5,
+            "cache_read": 0.15
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.75,
+            "output": 3.75,
+            "cache_read": 0.075
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 2.7,
+            "output": 13.5,
+            "cache_read": 0.27
+          }
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "gemini-3.1-flash-lite",
+      "provider": "google",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read": 0.025
+      },
+      "context_window": 1048576,
+      "notes": "Text input/output rates. Cache storage and grounding are additional charges.",
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.25,
+            "output": 1.5,
+            "cache_read": 0.025
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.125,
+            "output": 0.75,
+            "cache_read": 0.0125
+          }
+        },
+        {
+          "service_tier": "flex",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.125,
+            "output": 0.75,
+            "cache_read": 0.0125
+          }
+        },
+        {
+          "service_tier": "priority",
+          "input_tokens_min": 0,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.45,
+            "output": 2.7,
+            "cache_read": 0.045
+          }
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "mistral-large-4",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "preview",
+      "pricing": {
+        "input": 1.36,
+        "output": 4.18,
+        "cache_read": 0.14
+      },
+      "context_window": 1000000,
+      "aliases": [],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates. Temporary 50% sale: input 0.68, output 2.09, cache read 0.07; regular list rates retained."
+    },
+    {
+      "id": "mistral-large-2512",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.5,
+        "output": 1.5,
+        "cache_read": 0.05
+      },
+      "context_window": 256000,
+      "aliases": [
+        "mistral-large-3"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "mistral-medium-3-5",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
+      },
+      "context_window": 256000,
+      "aliases": [
+        "mistral-medium-3.5"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "mistral-small-2603",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.015
+      },
+      "context_window": 256000,
+      "aliases": [
+        "mistral-small-4"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "ministral-14b-2512",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.2,
+        "output": 0.2,
+        "cache_read": 0.02
+      },
+      "context_window": 256000,
+      "aliases": [
+        "ministral-3-14b"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "ministral-8b-2512",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.15,
+        "cache_read": 0.015
+      },
+      "context_window": 256000,
+      "aliases": [
+        "ministral-3-8b"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "ministral-3b-2512",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.1,
+        "cache_read": 0.01
+      },
+      "context_window": 256000,
+      "aliases": [
+        "ministral-3-3b"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "codestral-2508",
+      "provider": "mistral",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.3,
+        "output": 0.9,
+        "cache_read": 0.03
+      },
+      "context_window": 128000,
+      "aliases": [
+        "codestral"
+      ],
+      "notes": "Standard global USD. Alternate service rates omitted because the retrieved pricing table supplies only standard rates."
+    },
+    {
+      "id": "command-a-03-2025",
+      "provider": "cohere",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 2.5,
+        "output": 10
+      },
+      "context_window": 256000,
+      "aliases": [
+        "command-a"
+      ]
+    },
+    {
+      "id": "command-r7b-12-2024",
+      "provider": "cohere",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.0375,
+        "output": 0.15
+      },
+      "context_window": 128000,
+      "aliases": [
+        "command-r7b"
+      ]
+    },
+    {
+      "id": "command-r-08-2024",
+      "provider": "cohere",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "context_window": 128000,
+      "aliases": [
+        "command-r-2024-08"
+      ]
+    },
+    {
+      "id": "command-r-plus-08-2024",
+      "provider": "cohere",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 2.5,
+        "output": 10
+      },
+      "context_window": 128000,
+      "aliases": [
+        "command-r-plus-2024-08"
+      ]
+    },
+    {
+      "id": "c4ai-aya-expanse-32b",
+      "provider": "cohere",
+      "as_of": "2026-10-07",
+      "status": "current",
+      "pricing": {
+        "input": 0.5,
+        "output": 1.5
+      },
+      "context_window": 128000,
+      "aliases": [
+        "aya-expanse-32b"
+      ]
+    },
+    {
+      "id": "chat-latest",
+      "provider": "openai",
+      "context_window": 400000,
+      "pricing": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5
+      },
+      "as_of": "2026-10-07",
+      "status": "current",
+      "notes": "Rolling endpoint for the latest ChatGPT Instant model. Specific historical snapshot remains a separate dated entry."
     }
   ]
 }
