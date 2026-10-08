@@ -9,6 +9,8 @@ Work in the token-prices checkout. Read its README, schema and `prices/sources.m
 
 Run `python3 scripts/fetch_sources.py` for all sources, or `--sources anthropic openai` for a requested subset. The helper downloads in parallel, keeps raw/readable snapshots in `~/.cache/token-prices/sources`, and uses conditional HTTP requests. Its JSON output identifies new, changed, unchanged and failed sources without loading whole pages into context.
 
+For OpenAI and tracked DeepInfra rows, run `python3 scripts/audit_prices.py` first. It normalizes service/context bands and hosting rate factors, reports only differences with explicit coverage, and never edits rates or `as_of`. Exit 0 means compared records match, 1 means differences, and 2 means fetch/parse failure. `--cached` is an explicitly offline comparison with snapshot timestamps, not fresh verification. Other providers still need model-specific review.
+
 Use `rg` for model IDs, pricing tables, cache columns, retirement text and context boundaries inside changed snapshots. Compare `previous.txt` with `source.txt` for changed sources. Unchanged snapshots narrow the review; they do not prove every catalog row is correct. For newly tracked models, ambiguous tiers, region changes or redirects, open the relevant model documentation even if the general pricing source is unchanged.
 
 Use provider markdown or structured metadata before scraping rendered navigation. OpenAI’s `/api/docs/pricing.md` contains the complete service tables that HTML “All models” controls can hide. Kimi’s current `platform.kimi.ai/docs/pricing/chat.md` contains JSX table literals that can disappear from HTML extraction; inspect those literals as data, never execute page code. DeepInfra’s public `/models/list` returns rate factors, served limits and `replaced_by` targets. Match exact serving endpoints in aliases/provenance; do not substitute advertised weight context for the hosted API limit.
@@ -26,6 +28,8 @@ Transcribe each service/context band independently. All bounds are inclusive; co
 For changed rows, record source URL, serving provider, region, conditions and verification date in `prices/sources.md`. Advance `as_of` only after verifying that row. Review cache columns and model lifecycle as well as input/output rates. Keep the snapshot files out of Git.
 
 ## Verify and deliver
+
+README freshness (catalog edit time, model/provider counts and per-model date range) is generated from the catalog. `current.json` is the moving file, not a guarantee that all rows were checked today. Do not stamp the schema or bulk-update `as_of` after an HTTP fetch. Run `python3 scripts/update_readme.py` after catalog changes so generated metadata remains consistent.
 
 Run `python3 scripts/validate.py`, `python3 scripts/update_readme.py --check`, and `python3 -m unittest discover -s tests`. Add source-backed regression coverage for newly introduced thresholds, changed aliases or cache/service differences. Report substantive changes and unresolved verification gaps briefly.
 

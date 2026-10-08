@@ -26,7 +26,8 @@
     },
     "updated_at": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Timestamp of the catalog edit, not proof that every model price was verified then. Per-model as_of records verification dates."
     },
     "models": {
       "type": "array",
@@ -88,7 +89,8 @@
         },
         "as_of": {
           "type": "string",
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Date of the last successful verification of this model entry. Retain the previous date and document any subsequent verification failure in notes."
         },
         "notes": {
           "type": "string"

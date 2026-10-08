@@ -33,6 +33,17 @@ and [schema](https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/schema/
 Consumers that require v1 should stay pinned. Historical catalogs are not updated.
 <!-- generated:consume:end -->
 
+## Freshness
+
+<!-- generated:freshness:start -->
+Catalog edited: `2026-10-08T06:27:55Z`.
+
+74 models across 11 providers. Model `as_of` dates range from `2026-09-01` to `2026-10-08`.
+
+`current.json` means the moving catalog, not that every price was verified today.
+Read each model's date, status, notes and [source provenance](prices/sources.md).
+<!-- generated:freshness:end -->
+
 ## Shape
 
 Each model has `id`, `provider`, optional `aliases` / `context_window`, and
@@ -137,6 +148,24 @@ in parallel and reports changed/unchanged/failed pages. Use `--sources openai
 anthropic` for a targeted check. It does not edit the catalog or treat a failed
 fetch as fresh verification. Follow model-specific sources where the provider
 index omits prices or alternate service tables.
+
+`python3 scripts/audit_prices.py` compares documented OpenAI service tables and
+tracked DeepInfra endpoints with the catalog, including missing cache fields,
+context limits and retirement targets. It emits JSON differences without editing
+rates or verification dates. Exit 0 means the compared records match, 1 means
+reviewable differences, and 2 means a fetch/parse failure. Coverage and unsupported
+records are explicit; this does not verify every provider. `--cached` uses saved
+evidence and labels its last HTTP check time.
+
+Sources include first-party API documentation, third-party serving providers,
+and retained historical aggregator entries. Aggregator prices do not establish
+first-party rates. Pricing conditions and the serving provider are recorded per
+model in [provenance](prices/sources.md).
+
+The schema describes the data format. Its `updated_at` property validates the
+catalog edit timestamp; duplicating that value on the schema itself would not
+establish price freshness. Generated README metadata comes from the catalog and
+release metadata, while `as_of` advances only after per-model verification.
 
 ## Release
 
