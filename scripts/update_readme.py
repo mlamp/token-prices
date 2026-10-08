@@ -43,8 +43,7 @@ def render_readme(text: str, metadata: dict, catalog: dict) -> str:
     tag, schema = latest['tag'], latest['schema_version']
     legacy_tag = legacy['tag']
     current_schema = catalog['schema_version']
-    content = f'''Latest stable release: [{tag}](https://github.com/{repository}/releases/tag/{tag})
-(schema v{schema}).
+    content = f'''Latest stable release: [{tag}](https://github.com/{repository}/releases/tag/{tag}) (schema v{schema}).
 
 Pinned catalog:
 
@@ -54,7 +53,7 @@ Pinned catalog:
 
 [Schema for {tag}]({raw}/{tag}/schema/token-prices.schema.json).
 
-Use `main` for the moving schema v{current_schema} catalog (may change without a tag):
+Moving catalog on `main` (schema v{current_schema}, may change without a tag):
 
 ```text
 {raw}/main/prices/current.json
@@ -62,9 +61,9 @@ Use `main` for the moving schema v{current_schema} catalog (may change without a
 
 [Current schema](schema/token-prices.schema.json).
 
-Historical schema v1 compatibility: [{legacy_tag} catalog]({raw}/{legacy_tag}/prices/current.json)
-and [schema]({raw}/{legacy_tag}/schema/token-prices.schema.json).
-Consumers that require v1 should stay pinned. Historical catalogs are not updated.
+For schema v1, use the [{legacy_tag} catalog]({raw}/{legacy_tag}/prices/current.json)
+and its [schema]({raw}/{legacy_tag}/schema/token-prices.schema.json).
+Historical catalogs are not updated.
 '''
     text = replace_block(text, 'consume', content)
     models = catalog['models']
@@ -72,8 +71,8 @@ Consumers that require v1 should stay pinned. Historical catalogs are not update
     freshness = (f"Catalog edited: `{catalog['updated_at']}`.\n\n"
                  f"{len(models)} models across {len({m['provider'] for m in models})} providers. "
                  f"Model `as_of` dates range from `{min(dates)}` to `{max(dates)}`.\n\n"
-                 "`current.json` means the moving catalog, not that every price was verified today.\n"
-                 "Read each model's date, status, notes and [source provenance](prices/sources.md).")
+                 "`current.json` is the moving catalog, not a promise that every price was verified today.\n"
+                 "Check each model's `as_of` date, `status`, notes and [source provenance](prices/sources.md).")
     text = replace_block(text, 'freshness', freshness)
     return replace_block(text, 'schema-version',
                          f"`schema_version` is `{current_schema}`. `status` is `current` | `legacy` | `preview`.")
