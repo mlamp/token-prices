@@ -1,8 +1,8 @@
 {
   "repository": "mlamp/token-prices",
   "latest": {
-    "tag": "v0.1.1",
-    "schema_version": 1
+    "tag": "v0.2.0",
+    "schema_version": 2
   },
   "legacy_v1": {
     "tag": "v0.1.1",
