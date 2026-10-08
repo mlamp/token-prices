@@ -8,11 +8,17 @@ pages and aggregators; they drift. Prefer vendor pages when they disagree.
 
 ## Consume
 
-Historical schema v1 catalog (pinned, no further updates):
+<!-- generated:consume:start -->
+Latest stable release: [v0.1.1](https://github.com/mlamp/token-prices/releases/tag/v0.1.1)
+(schema v1).
+
+Pinned catalog:
 
 ```text
 https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/prices/current.json
 ```
+
+[Schema for v0.1.1](https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/schema/token-prices.schema.json).
 
 Use `main` for the moving schema v2 catalog (may change without a tag):
 
@@ -20,12 +26,12 @@ Use `main` for the moving schema v2 catalog (may change without a tag):
 https://raw.githubusercontent.com/mlamp/token-prices/main/prices/current.json
 ```
 
-The [pinned v1 schema](https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/schema/token-prices.schema.json)
-is available under the same `v0.1.1` tag. Consumers that
-require v1 should stay pinned; v2 retains flat fields but changes the version
-and adds providers and optional tiers.
+[Current schema](schema/token-prices.schema.json).
 
-Schema: [`schema/token-prices.schema.json`](schema/token-prices.schema.json).
+Historical schema v1 compatibility: [v0.1.1 catalog](https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/prices/current.json)
+and [schema](https://raw.githubusercontent.com/mlamp/token-prices/v0.1.1/schema/token-prices.schema.json).
+Consumers that require v1 should stay pinned. Historical catalogs are not updated.
+<!-- generated:consume:end -->
 
 ## Shape
 
@@ -33,7 +39,9 @@ Each model has `id`, `provider`, optional `aliases` / `context_window`, and
 `pricing.input` / `pricing.output` (required). Optional cache fields:
 `cache_read`, `cache_write`, `cache_5m_write`, `cache_1h_write`.
 
+<!-- generated:schema-version:start -->
 `schema_version` is `2`. `status` is `current` | `legacy` | `preview`.
+<!-- generated:schema-version:end -->
 `provider` supports OpenAI, Anthropic, Google, xAI, Meta, Moonshot, DeepSeek,
 Qwen, Zhipu, Mistral, Cohere, and `other`. See the
 [ID and alias convention](#model-ids-and-aliases) when matching model names.
@@ -112,12 +120,30 @@ Unverified historical entries retain their prior IDs and explicit notes.
 
 ```bash
 python3 scripts/validate.py
+python3 scripts/update_readme.py --check
 python3 -m unittest discover -s tests
 ```
 
-Checks the v2 schema, finite nonnegative prices, tier bounds/overlap, flat/tier
+Checks the catalog schema, finite nonnegative prices, tier bounds/overlap, flat/tier
 equality, unique ids/aliases (case-insensitive aliases), and a small PII scan
 on published text (no emails, home paths, or token-shaped strings).
+
+## Release
+
+Run the [Release workflow](https://github.com/mlamp/token-prices/actions/workflows/release.yml)
+from `main`, supplying the next stable `vMAJOR.MINOR.PATCH` version. It validates
+the catalog, runs tests, updates `release.json` and the generated README blocks,
+commits them, then pushes `main` and the tag together and publishes a GitHub release.
+The tag therefore includes its own correct version, catalog URL and schema URL.
+
+`release.json` records the latest stable release and the historical v1 pin.
+The moving schema version comes from `prices/current.json`. To regenerate the
+README locally, run `python3 scripts/update_readme.py`. CI rejects stale
+metadata on pull requests and pushes to `main`; leave generated blocks to the script.
+Use the workflow for releases instead of creating tags or releases manually.
+
+If publishing fails after the tag was pushed, publish that existing tag with
+`gh release create <tag> --verify-tag --generate-notes --latest`; do not move it.
 
 ## Provenance
 
