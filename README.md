@@ -128,6 +128,16 @@ Checks the catalog schema, finite nonnegative prices, tier bounds/overlap, flat/
 equality, unique ids/aliases (case-insensitive aliases), and a small PII scan
 on published text (no emails, home paths, or token-shaped strings).
 
+## Refresh prices
+
+Use the [refresh-token-prices skill](skills/refresh-token-prices/SKILL.md) for
+provider-source checks, price/tier updates, provenance and verification.
+`python3 scripts/fetch_sources.py` caches readable snapshots, fetches sources
+in parallel and reports changed/unchanged/failed pages. Use `--sources openai
+anthropic` for a targeted check. It does not edit the catalog or treat a failed
+fetch as fresh verification. Follow model-specific sources where the provider
+index omits prices or alternate service tables.
+
 ## Release
 
 Run the [Release workflow](https://github.com/mlamp/token-prices/actions/workflows/release.yml)

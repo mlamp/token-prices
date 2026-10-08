@@ -1,6 +1,6 @@
 # Provenance
 
-Verification attempted on 2026-10-07. Rates are USD per million text tokens.
+Last full refresh: 2026-10-07. Targeted price review: 2026-10-08 (Anthropic, Moonshot/Kimi, OpenAI, DeepSeek and tracked DeepInfra endpoints). Rates are USD per million text tokens.
 
 Use each model’s `as_of` as its verification date. `updated_at` records the catalog refresh, including retained historical rows. Sources confirm published availability, not access for every account.
 
@@ -33,8 +33,8 @@ First-party global/international list rates are preferred. Hosted-only entries u
 | `qwen3.8-max` | [Pricing](https://www.alibabacloud.com/help/en/model-studio/model-pricing) | Alibaba Cloud Model Studio | global / Frankfurt | 2026-10-07 | Global/international USD; both thinking modes. Cache source: https://www.alibabacloud.com/help/en/model-studio/context-cache |
 | `qwen3.8-2.4t-a95b` | [Pricing](https://www.alibabacloud.com/help/en/model-studio/model-pricing) | Alibaba Cloud Model Studio | international / Singapore | 2026-10-07 | Global/international USD; both thinking modes. Cache source: https://www.alibabacloud.com/help/en/model-studio/context-cache |
 | `qwen3.7-flash` | [Pricing](https://www.alibabacloud.com/help/en/model-studio/model-pricing) | Alibaba Cloud Model Studio | global / Frankfurt | 2026-10-07 | Global USD, documented context bands; implicit caching: https://www.alibabacloud.com/help/en/model-studio/context-cache |
-| `kimi-k3` | [Original aggregator](https://pricepertoken.com/) | Unspecified | Unspecified | Retained 2026-09-01; refresh unverified | Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified. |
-| `kimi-k2.7-code` | [Original aggregator](https://pricepertoken.com/) | Unspecified | Unspecified | Retained 2026-09-01; refresh unverified | Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified. |
+| `kimi-k3` | [Pricing markdown](https://platform.kimi.ai/docs/pricing/chat.md) | Kimi API / Moonshot | global | 2026-10-08 | First-party Kimi API global USD list rates. Verified against the complete pricing markdown; pre-tax. Cache writes billed separately by 5-minute/1-hour TTL. |
+| `kimi-k2.7-code` | [Pricing markdown](https://platform.kimi.ai/docs/pricing/chat.md) | Kimi API / Moonshot | global | 2026-10-08 | First-party Kimi API global USD list rates. Verified against the complete pricing markdown; pre-tax. HighSpeed is a separately priced endpoint and is not inferred as a service tier. |
 | `kimi-k2.5` | [Original aggregator](https://pricepertoken.com/) | Unspecified | Unspecified | Retained 2026-09-01; refresh unverified | Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified. |
 | `grok-4.5` | [Pricing](https://docs.x.ai/developers/models/grok-4.5) | xai | us-east-1 | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `grok-4.6` | [Pricing](https://docs.x.ai/developers/models/grok-4.6) | xai | us-east-1 | 2026-10-07 | Regular USD list prices; text input and text output. |
@@ -58,7 +58,7 @@ First-party global/international list rates are preferred. Hosted-only entries u
 | `gpt-5.4-nano` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `gpt-5.4-pro` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Published USD table rates; see notes for GPT-5.6 Sol promotion and regional uplifts. |
 | `claude-opus-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
-| `claude-sonnet-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-07 | Regular USD list prices; text input and text output. |
+| `claude-sonnet-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-08 | Cache read decreased to $0.10 standard / $0.05 batch per million tokens. |
 | `deepseek-v4.1-flash` | [Pricing](https://api-docs.deepseek.com/quick_start/pricing/) | deepseek | global | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `glm-5.3-flashx` | [Pricing](https://docs.z.ai/guides/overview/pricing) | Z.AI | international API | 2026-10-07 | Regular USD list prices; text input and text output. |
 | `glm-4.7-flashx` | [Pricing](https://docs.z.ai/guides/overview/pricing) | Z.AI | international API | 2026-10-07 | Regular USD list prices; text input and text output. |
@@ -81,12 +81,13 @@ First-party global/international list rates are preferred. Hosted-only entries u
 | `command-r-plus-08-2024` | [Pricing](https://docs.cohere.com/docs/command-r-plus) | cohere | global | 2026-10-07 | Paid production API token rates; no public cache price. |
 | `c4ai-aya-expanse-32b` | [Pricing](https://docs.cohere.com/docs/models) | cohere | global | 2026-10-07 | Paid production API token rates. Aya rate source: https://cohere.com/pricing |
 | `chat-latest` | [Pricing](https://developers.openai.com/api/docs/pricing) | openai | global | 2026-10-07 | Rolling ChatGPT Instant endpoint; [ID and context](https://developers.openai.com/api/docs/models/chat-latest). |
+| `claude-haiku-5-5` | [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) | anthropic | global | 2026-10-08 | Standard input/output $0.10/$0.50 through 100,000 input tokens; $0.50/$2.50 above that boundary. Batch halves rates. [ID/context](https://platform.claude.com/docs/en/models/haiku-5-5/overview). |
 
 ## Model identity and availability
 
 OpenAI context and IDs: [model catalog](https://developers.openai.com/api/docs/models); model-specific pages linked below. GPT-5.5 Pro Batch/Flex long-context cells are unavailable and those services stop at 272,000 input tokens. Batch/Flex/Fast/Ultrafast rates are transcribed independently from the complete [pricing markdown](https://developers.openai.com/api/docs/pricing.md). Fast replaces the former Priority name. Astra Ultrafast permits global processing and US residency; other regional residency is unavailable. Regional/FedRAMP uplifts are excluded. GPT-5.6 Sol has a promotional label without a separately published undiscounted rate; its published table rates are used and that exception is noted.
 
-Claude IDs, context and active status: [models](https://platform.claude.com/docs/en/models/overview), [deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations). Batch/cache multipliers and Opus Fast rates are documented on the pricing page. Primary Anthropic IDs use the exact documented Claude API IDs, including the dated Haiku snapshot. Generic opus, sonnet and fable aliases follow the current models; version aliases and former dotted catalog IDs remain attached to their versions. See the [catalog naming convention](../README.md#model-ids-and-aliases).
+Claude IDs, context and active status: [models](https://platform.claude.com/docs/en/models/overview), [deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations). Batch/cache multipliers and Opus Fast rates are documented on the pricing page. Primary Anthropic IDs use the exact documented Claude API IDs, including the dated Haiku snapshot. Generic opus, sonnet, haiku and fable aliases follow the current models; version aliases and former dotted catalog IDs remain attached to their versions. See the [catalog naming convention](../README.md#model-ids-and-aliases).
 
 DeepSeek [pricing and redirects](https://api-docs.deepseek.com/quick_start/pricing/) identifies `deepseek-flash` as V4.1 Flash, including the former V4 Flash Vision endpoint. V4 Pro serves V4-Pro-0813. Peak rates are the baseline; off-peak is 50% cheaper.
 
@@ -104,7 +105,7 @@ Mistral IDs/context: [current lineup](https://docs.mistral.ai/getting-started/mo
 
 Cohere availability/context: [models](https://docs.cohere.com/docs/models). Command A+, Reasoning, Vision, Translate and North models provide free evaluation or sales/private deployment access without public paid token rates and are excluded. Deprecated `command-r` and `command-r-plus` endpoints are not aliases of the newer dated models. Aya Expanse 8B is retired; 32B remains live.
 
-Moonshot [first-party pricing](https://platform.moonshot.ai/docs/pricing) could not be retrieved (HTTP 403). Its three prior rows retain dates and an explicit verification-failure note. The `chat-latest-07012026` snapshot cannot be established by the rolling `chat-latest` price row; it also retains its date and note. The generic name now resolves to the separately verified rolling `chat-latest` entry.
+Moonshot [first-party pricing](https://platform.moonshot.ai/docs/pricing) could not be retrieved (HTTP 403). The 2026-10-08 check recovered first-party K3 and K2.7 pricing from the new platform.kimi.ai markdown URL; those rows are updated. K2.5 is absent from the current table and retains its previous date and note. The `chat-latest-07012026` snapshot cannot be established by the rolling `chat-latest` price row; it also retains its date and note. The generic name now resolves to the separately verified rolling `chat-latest` entry.
 
 ## OpenAI model references
 
@@ -122,6 +123,12 @@ Moonshot [first-party pricing](https://platform.moonshot.ai/docs/pricing) could 
 - [gpt-5.5-pro](https://developers.openai.com/api/docs/models/gpt-5.5-pro)
 - [gpt-5.4-nano](https://developers.openai.com/api/docs/models/gpt-5.4-nano)
 - [gpt-5.4-pro](https://developers.openai.com/api/docs/models/gpt-5.4-pro)
+
+## Targeted review on 2026-10-08
+
+Anthropic's published table adds Haiku 5.5 with a 100,000-token boundary and reduces Sonnet 5.5 cache-read rates. The `haiku` alias now follows 5.5; 4.5 remains available under its version names. Haiku's 1M context and API ID are confirmed on its model page. Input/output, cache-write and cache-read rates are transcribed separately for both context bands; documented Batch/caching discounts stack.
+
+The complete OpenAI pricing markdown is unchanged from the previous fetched snapshot. Tracked DeepInfra serving endpoints have unchanged prices, cache factors, context limits and retirement targets, even though unrelated model metadata changed. These checks do not advance every model's verification date. The DeepSeek public peak table is also unchanged. Kimi’s new platform publishes complete pricing in markdown/JSX tables: K3 is $3/$15, with $0.30 cached input and $3/$6 writes for 5min/1h TTL; K2.7 Code is $0.95/$4 with $0.19 cached input. Their exact served limits are 1,048,576 and 262,144 tokens. HTML rendering omits these table literals, so the markdown is the recorded evidence. K2.5 remains unverified. Other providers retain the previous full-refresh dates; this is a targeted check, not a claim that every provider was reverified.
 
 ## Historical catalog
 
