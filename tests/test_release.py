@@ -21,7 +21,14 @@ Keep this paragraph.
 <!-- generated:schema-version:start -->
 stale schema version
 <!-- generated:schema-version:end -->
+
+<!-- generated:freshness:start -->
+stale freshness
+<!-- generated:freshness:end -->
 '''
+CATALOG = {'schema_version': 2, 'updated_at': '2026-10-08T06:00:00Z',
+           'models': [{'provider': 'openai', 'as_of': '2026-10-07'},
+                      {'provider': 'anthropic', 'as_of': '2026-10-08'}]}
 METADATA = {
     'repository': 'example/catalog',
     'latest': {'tag': 'v0.1.1', 'schema_version': 1},
@@ -31,7 +38,7 @@ METADATA = {
 
 class ReadmeTests(unittest.TestCase):
     def test_released_schema_is_distinct_from_moving_schema(self):
-        result = render_readme(TEMPLATE, METADATA, {'schema_version': 2})
+        result = render_readme(TEMPLATE, METADATA, CATALOG)
         self.assertIn('Latest stable release: [v0.1.1]', result)
         self.assertIn('(schema v1)', result)
         self.assertIn('moving schema v2', result)
@@ -39,12 +46,12 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn('/v0.1.1/prices/current.json', result)
         self.assertIn('/v0.1.1/schema/token-prices.schema.json', result)
         self.assertIn('Keep this paragraph.', result)
-        self.assertEqual(render_readme(result, METADATA, {'schema_version': 2}), result)
+        self.assertEqual(render_readme(result, METADATA, CATALOG), result)
 
     def test_new_release_links_and_old_compatibility_pin(self):
         metadata = copy.deepcopy(METADATA)
         metadata['latest'] = {'tag': 'v0.2.0', 'schema_version': 2}
-        result = render_readme(TEMPLATE, metadata, {'schema_version': 3})
+        result = render_readme(TEMPLATE, metadata, dict(CATALOG, schema_version=3))
         self.assertIn('https://github.com/example/catalog/releases/tag/v0.2.0', result)
         self.assertIn('/v0.2.0/prices/current.json', result)
         self.assertIn('/v0.2.0/schema/token-prices.schema.json', result)
@@ -60,7 +67,15 @@ class ReadmeTests(unittest.TestCase):
                      TEMPLATE.replace(start, '<swap>').replace(end, start).replace('<swap>', end)]:
             with self.subTest(text=text):
                 with self.assertRaises(ValueError):
-                    render_readme(text, METADATA, {'schema_version': 2})
+                    render_readme(text, METADATA, CATALOG)
+
+    def test_freshness_is_derived_without_claiming_all_models_are_fresh(self):
+        result = render_readme(TEMPLATE, METADATA, CATALOG)
+        self.assertIn(CATALOG['updated_at'], result)
+        self.assertIn('2 models across 2 providers', result)
+        self.assertIn('`2026-10-07` to `2026-10-08`', result)
+        changed = dict(CATALOG, updated_at='2026-10-09T00:00:00Z')
+        self.assertNotEqual(render_readme(TEMPLATE, METADATA, changed), result)
 
     def test_stable_versions_only(self):
         self.assertEqual(version_tuple('v1.20.3'), (1, 20, 3))
@@ -77,7 +92,7 @@ class PreparationTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / 'prices').mkdir()
-        (self.root / 'prices/current.json').write_text(json.dumps({'schema_version': 2}))
+        (self.root / 'prices/current.json').write_text(json.dumps(CATALOG))
         (self.root / 'release.json').write_text(json.dumps(METADATA))
         (self.root / 'README.md').write_text(TEMPLATE)
         subprocess.run(['git', 'init', '-q'], cwd=self.root, check=True)
@@ -135,7 +150,7 @@ class PreparationTests(unittest.TestCase):
         update(self.root)
         self.assertTrue(update(self.root, check=True))
         catalog_path = self.root / 'prices/current.json'
-        catalog_path.write_text(json.dumps({'schema_version': 3}))
+        catalog_path.write_text(json.dumps(dict(CATALOG, schema_version=3)))
         self.assertFalse(update(self.root, check=True))
 
 

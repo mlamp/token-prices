@@ -67,6 +67,14 @@ and [schema]({raw}/{legacy_tag}/schema/token-prices.schema.json).
 Consumers that require v1 should stay pinned. Historical catalogs are not updated.
 '''
     text = replace_block(text, 'consume', content)
+    models = catalog['models']
+    dates = [model['as_of'] for model in models]
+    freshness = (f"Catalog edited: `{catalog['updated_at']}`.\n\n"
+                 f"{len(models)} models across {len({m['provider'] for m in models})} providers. "
+                 f"Model `as_of` dates range from `{min(dates)}` to `{max(dates)}`.\n\n"
+                 "`current.json` means the moving catalog, not that every price was verified today.\n"
+                 "Read each model's date, status, notes and [source provenance](prices/sources.md).")
+    text = replace_block(text, 'freshness', freshness)
     return replace_block(text, 'schema-version',
                          f"`schema_version` is `{current_schema}`. `status` is `current` | `legacy` | `preview`.")
 
