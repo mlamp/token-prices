@@ -41,7 +41,7 @@ class ReadmeTests(unittest.TestCase):
         result = render_readme(TEMPLATE, METADATA, CATALOG)
         self.assertIn('Latest stable release: [v0.1.1]', result)
         self.assertIn('(schema v1)', result)
-        self.assertIn('moving schema v2', result)
+        self.assertIn('Moving catalog on `main` (schema v2', result)
         self.assertIn('`schema_version` is `2`', result)
         self.assertIn('/v0.1.1/prices/current.json', result)
         self.assertIn('/v0.1.1/schema/token-prices.schema.json', result)
@@ -56,7 +56,7 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn('/v0.2.0/prices/current.json', result)
         self.assertIn('/v0.2.0/schema/token-prices.schema.json', result)
         self.assertIn('(schema v2)', result)
-        self.assertIn('moving schema v3', result)
+        self.assertIn('Moving catalog on `main` (schema v3', result)
         self.assertIn('`schema_version` is `3`', result)
         self.assertIn('/v0.1.1/prices/current.json', result)
 
