@@ -2,7 +2,7 @@
   "schema_version": 2,
   "currency": "USD",
   "unit": "usd_per_million_tokens",
-  "updated_at": "2026-10-07T18:16:45Z",
+  "updated_at": "2026-10-08T06:27:55Z",
   "models": [
     {
       "id": "claude-opus-5",
@@ -210,7 +210,6 @@
       "id": "claude-haiku-4-5-20251001",
       "provider": "anthropic",
       "aliases": [
-        "haiku",
         "haiku-4.5",
         "haiku-4-5",
         "claude-haiku-4-5",
@@ -1129,15 +1128,17 @@
         "k3",
         "kimi-k3-1m"
       ],
-      "context_window": 1000000,
+      "context_window": 1048576,
       "pricing": {
-        "input": 2.85,
-        "output": 14.25,
-        "cache_read": 0.3
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_5m_write": 3,
+        "cache_1h_write": 6
       },
-      "as_of": "2026-09-01",
+      "as_of": "2026-10-08",
       "status": "current",
-      "notes": "Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified."
+      "notes": "First-party Kimi API global USD list rates. Verified against the complete pricing markdown; pre-tax. Cache writes billed separately by 5-minute/1-hour TTL."
     },
     {
       "id": "kimi-k2.7-code",
@@ -1147,15 +1148,15 @@
         "kimi-k2.7",
         "k3-256k"
       ],
-      "context_window": 262000,
+      "context_window": 262144,
       "pricing": {
-        "input": 0.66,
-        "output": 3.4,
-        "cache_read": 0.16
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.19
       },
-      "as_of": "2026-09-01",
+      "as_of": "2026-10-08",
       "status": "current",
-      "notes": "Verification incomplete on 2026-10-07: first-party pricing page returned HTTP 403; prior rates, context and availability retained. Serving provider and region of prior rates are unspecified."
+      "notes": "First-party Kimi API global USD list rates. Verified against the complete pricing markdown; pre-tax. HighSpeed is a separately priced endpoint and is not inferred as a service tier."
     },
     {
       "id": "kimi-k2.5",
@@ -2615,12 +2616,12 @@
     {
       "id": "claude-sonnet-5-5",
       "provider": "anthropic",
-      "as_of": "2026-10-07",
+      "as_of": "2026-10-08",
       "status": "current",
       "pricing": {
         "input": 2,
         "output": 10,
-        "cache_read": 0.2,
+        "cache_read": 0.1,
         "cache_5m_write": 2.5,
         "cache_1h_write": 4
       },
@@ -2639,7 +2640,7 @@
           "pricing": {
             "input": 2,
             "output": 10,
-            "cache_read": 0.2,
+            "cache_read": 0.1,
             "cache_5m_write": 2.5,
             "cache_1h_write": 4
           }
@@ -2651,7 +2652,7 @@
           "pricing": {
             "input": 1.0,
             "output": 5.0,
-            "cache_read": 0.1,
+            "cache_read": 0.05,
             "cache_5m_write": 1.25,
             "cache_1h_write": 2.0
           }
@@ -3175,6 +3176,77 @@
       "as_of": "2026-10-07",
       "status": "current",
       "notes": "Rolling endpoint for the latest ChatGPT Instant model. Specific historical snapshot remains a separate dated entry."
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "provider": "anthropic",
+      "aliases": [
+        "haiku",
+        "haiku-5-5",
+        "haiku-5.5",
+        "claude-haiku-5.5"
+      ],
+      "context_window": 1000000,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_5m_write": 0.125,
+        "cache_1h_write": 0.2
+      },
+      "pricing_tiers": [
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 0,
+          "input_tokens_max": 100000,
+          "pricing": {
+            "input": 0.1,
+            "output": 0.5,
+            "cache_read": 0.01,
+            "cache_5m_write": 0.125,
+            "cache_1h_write": 0.2
+          }
+        },
+        {
+          "service_tier": "standard",
+          "input_tokens_min": 100001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.5,
+            "output": 2.5,
+            "cache_read": 0.05,
+            "cache_5m_write": 0.625,
+            "cache_1h_write": 1.0
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 0,
+          "input_tokens_max": 100000,
+          "pricing": {
+            "input": 0.05,
+            "output": 0.25,
+            "cache_read": 0.005,
+            "cache_5m_write": 0.0625,
+            "cache_1h_write": 0.1
+          }
+        },
+        {
+          "service_tier": "batch",
+          "input_tokens_min": 100001,
+          "input_tokens_max": null,
+          "pricing": {
+            "input": 0.25,
+            "output": 1.25,
+            "cache_read": 0.025,
+            "cache_5m_write": 0.3125,
+            "cache_1h_write": 0.5
+          }
+        }
+      ],
+      "as_of": "2026-10-08",
+      "status": "current",
+      "notes": "Global first-party API. Higher rates apply to the full request above 100,000 input tokens. Batch and caching discounts stack; regional uplifts excluded."
     }
   ]
 }

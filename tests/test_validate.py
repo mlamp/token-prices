@@ -223,7 +223,7 @@ class CatalogTests(unittest.TestCase):
             'claude-opus-5', 'claude-opus-4-8', 'claude-sonnet-5',
             'claude-sonnet-4-6', 'claude-haiku-4-5-20251001',
             'claude-fable-5', 'claude-fable-5-1',
-            'claude-opus-5-5', 'claude-sonnet-5-5',
+            'claude-opus-5-5', 'claude-sonnet-5-5', 'claude-haiku-5-5',
         }
         self.assertEqual({m['id'] for m in self.doc['models']
                           if m['provider'] == 'anthropic'}, expected)
@@ -245,8 +245,31 @@ class CatalogTests(unittest.TestCase):
                 self.assertEqual(names[alias], mid)
         self.assertEqual(names['gpt-6.1-sol'], 'gpt-6.1-sol')
 
+    def test_first_party_kimi_refresh(self):
+        self.assertEqual(self.models['kimi-k3']['pricing'],
+                         {'input': 3, 'output': 15, 'cache_read': .3,
+                          'cache_5m_write': 3, 'cache_1h_write': 6})
+        self.assertEqual(self.models['kimi-k3']['context_window'], 1048576)
+        self.assertEqual(self.models['kimi-k2.7-code']['pricing'],
+                         {'input': .95, 'output': 4, 'cache_read': .19})
+        self.assertEqual(self.models['kimi-k2.7-code']['context_window'], 262144)
+
+    def test_haiku_boundary_and_sonnet_cache_refresh(self):
+        self.assertEqual(self.select('claude-haiku-5-5', 'standard', 100000),
+                         {'input': .1, 'output': .5, 'cache_read': .01,
+                          'cache_5m_write': .125, 'cache_1h_write': .2})
+        self.assertEqual(self.select('claude-haiku-5-5', 'standard', 100001),
+                         {'input': .5, 'output': 2.5, 'cache_read': .05,
+                          'cache_5m_write': .625, 'cache_1h_write': 1})
+        self.assertEqual(self.select('claude-haiku-5-5', 'batch', 100001)['output'], 1.25)
+        self.assertEqual(self.select('claude-sonnet-5-5', 'standard', 0)['cache_read'], .1)
+        self.assertEqual(self.select('claude-sonnet-5-5', 'batch', 0)['cache_read'], .05)
+        aliases = {a: m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
+        self.assertEqual(aliases['haiku'], 'claude-haiku-5-5')
+        self.assertEqual(aliases['haiku-4.5'], 'claude-haiku-4-5-20251001')
+
     def test_failed_verification_keeps_dates_and_notes(self):
-        for mid in ['kimi-k3', 'kimi-k2.7-code', 'kimi-k2.5',
+        for mid in ['kimi-k2.5',
                     'chat-latest-07012026', 'gemini-3-pro-preview']:
             self.assertEqual(self.models[mid]['as_of'], '2026-09-01')
             self.assertIn('2026-10-07', self.models[mid]['notes'])
