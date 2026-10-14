@@ -10,15 +10,15 @@ disagree.
 ## Get the JSON
 
 <!-- generated:consume:start -->
-Latest stable release: [v0.2.0](https://github.com/mlamp/token-prices/releases/tag/v0.2.0) (schema v2).
+Latest stable release: [v0.2.1](https://github.com/mlamp/token-prices/releases/tag/v0.2.1) (schema v2).
 
 Pinned catalog:
 
 ```text
-https://raw.githubusercontent.com/mlamp/token-prices/v0.2.0/prices/current.json
+https://raw.githubusercontent.com/mlamp/token-prices/v0.2.1/prices/current.json
 ```
 
-[Schema for v0.2.0](https://raw.githubusercontent.com/mlamp/token-prices/v0.2.0/schema/token-prices.schema.json).
+[Schema for v0.2.1](https://raw.githubusercontent.com/mlamp/token-prices/v0.2.1/schema/token-prices.schema.json).
 
 Moving catalog on `main` (schema v2, may change without a tag):
 
