@@ -173,8 +173,10 @@ class CatalogTests(unittest.TestCase):
                          {'input': 1, 'output': 5, 'cache_read': .05, 'cache_write': 1.25})
         self.assertEqual(self.select('gpt-6.1-sol', 'batch', 272001)['output'], 7.5)
         self.assertEqual(self.select('gpt-6.1-sol', 'fast', 272000)['input'], 4)
-        with self.assertRaises(StopIteration):
-            self.select('gpt-6.1-sol', 'ultrafast', 100)
+        self.assertEqual(self.select('gpt-6.1-sol', 'ultrafast', 272000),
+                         {'input': 12, 'output': 60, 'cache_read': .6, 'cache_write': 15})
+        self.assertEqual(self.select('gpt-6.1-sol', 'ultrafast', 272001),
+                         {'input': 24, 'output': 90, 'cache_read': 1.2, 'cache_write': 30})
 
     def test_missing_long_context_service_is_not_standard(self):
         self.assertEqual(self.select('gpt-5.5-pro', 'batch', 272000)['input'], 15)
@@ -253,6 +255,37 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(self.models['kimi-k2.7-code']['pricing'],
                          {'input': .95, 'output': 4, 'cache_read': .19})
         self.assertEqual(self.models['kimi-k2.7-code']['context_window'], 262144)
+
+    def test_argon_regular_service_rates_and_implicit_cache(self):
+        # Google pricing: regular rates from December 1; 50% discount until then.
+        model = self.models['gemini-4-argon']
+        self.assertEqual(model['context_window'], 1048576)
+        self.assertEqual(model['pricing'], {'input': 4, 'output': 20, 'cache_read': .2})
+        expected = {
+            'standard': {'input': 4, 'output': 20, 'cache_read': .2},
+            'batch': {'input': 2, 'output': 10, 'cache_read': .1},
+            'flex': {'input': 2, 'output': 10, 'cache_read': .1},
+            'priority': {'input': 7.2, 'output': 36, 'cache_read': .36},
+        }
+        for service, pricing in expected.items():
+            self.assertEqual(self.select(model['id'], service, 1048576), pricing)
+        self.assertIn('2026-11-30', model['notes'])
+        self.assertIn('2026-12-01', model['notes'])
+
+    def test_kimi_endpoint_cache_and_batch_differences(self):
+        # Kimi pricing/chat.md and pricing/batch: HighSpeed is its own endpoint.
+        model = self.models['kimi-k2.6']
+        self.assertEqual(model['pricing'], {'input': .95, 'output': 4, 'cache_read': .16})
+        self.assertEqual(self.select(model['id'], 'batch', 262144),
+                         {'input': .57, 'output': 2.4, 'cache_read': .096})
+        highspeed = self.models['kimi-k2.7-code-highspeed']
+        self.assertEqual(highspeed['pricing'], {'input': 1.9, 'output': 8, 'cache_read': .38})
+        self.assertEqual(model['context_window'], 262144)
+        self.assertEqual(highspeed['context_window'], 262144)
+        self.assertNotIn('pricing_tiers', highspeed)
+        names = {a: m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
+        self.assertEqual(names['k2.6'], model['id'])
+        self.assertEqual(names['k2.7-code-highspeed'], highspeed['id'])
 
     def test_haiku_boundary_and_sonnet_cache_refresh(self):
         self.assertEqual(self.select('claude-haiku-5-5', 'standard', 100000),
