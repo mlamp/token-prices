@@ -36,9 +36,9 @@ Historical catalogs are not updated.
 ## Freshness
 
 <!-- generated:freshness:start -->
-Catalog edited: `2026-10-08T06:27:55Z`.
+Catalog edited: `2026-10-14T14:43:03Z`.
 
-74 models across 11 providers. Model `as_of` dates range from `2026-09-01` to `2026-10-08`.
+77 models across 11 providers. Model `as_of` dates range from `2026-09-01` to `2026-10-14`.
 
 `current.json` is the moving catalog, not a promise that every price was verified today.
 Check each model's `as_of` date, `status`, notes and [source provenance](prices/sources.md).
