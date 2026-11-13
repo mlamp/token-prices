@@ -7,7 +7,7 @@ import urllib.error
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.fetch_sources import SOURCES, fetch, readable
+from scripts.fetch_sources import SOURCES, fetch, readable, kimi_tables
 
 
 class Response(io.BytesIO):
@@ -53,6 +53,37 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(Path(report['snapshot']).read_text(), 'price: 2')
         self.assertEqual(json.loads((self.cache/'openai/metadata.json').read_text())['checked_at'],
                          report['checked_at'])
+
+    def test_kimi_literal_extraction_and_failure_preserves_cache(self):
+        literal = 'rows:[[_jsx(_components.a,{children:`kimi-k3`}),`$3.00 / MTok`,`$15.00 / MTok`,`$0.30 / MTok`]]'
+        page = '<script>self.__next_f.push(' + json.dumps([1, literal]) + ')</script>'
+        self.assertIn('kimi-k3 | $3.00', kimi_tables(page))
+        with self.assertRaises(ValueError):
+            kimi_tables('<table><tbody /></table>')
+        with patch('scripts.fetch_sources.urllib.request.urlopen', return_value=Response(page.encode())):
+            self.assertEqual(fetch('moonshot', self.cache)['status'], 'new')
+        folder = self.cache/'moonshot'
+        before = {p.name: p.read_bytes() for p in folder.iterdir()}
+        with patch('scripts.fetch_sources.urllib.request.urlopen', return_value=Response(b'<table />')):
+            self.assertEqual(fetch('moonshot', self.cache)['status'], 'failed')
+        self.assertEqual({p.name: p.read_bytes() for p in folder.iterdir()}, before)
+
+    def test_kimi_manifest_linked_and_plain_cells(self):
+        code = 'rows:[[_jsx(_components.a,{children:`kimi-k3`}),`$3.00 / MTok`,`$15.00 / MTok`,`$0.30 / MTok`,`$3.00 / MTok`,`$6.00 / MTok`],[`kimi-k2.6`,`$0.57 / MTok`,`$2.40 / MTok`,`$0.10 / MTok`,`—`,`—`]]'
+        manifest = {'page': {'mdx': {'mdxSource': {'compiledSource': code}}}}
+        page = '<template data-mint="manifest">' + json.dumps(manifest) + '</template>'
+        self.assertEqual(kimi_tables(page).splitlines(), [
+            'kimi-k3 | $3.00 / MTok | $15.00 / MTok | $0.30 / MTok | $3.00 / MTok | $6.00 / MTok',
+            'kimi-k2.6 | $0.57 / MTok | $2.40 / MTok | $0.10 / MTok | — | —'])
+        with patch('scripts.fetch_sources.urllib.request.urlopen', return_value=Response(page.encode())):
+            self.assertEqual(fetch('moonshot_batch', self.cache)['status'], 'new')
+        folder = self.cache/'moonshot_batch'
+        before = {p.name: p.read_bytes() for p in folder.iterdir()}
+        for invalid in ['{', '{}', json.dumps({'page': {'mdx': {'mdxSource': {'compiledSource': 3}}}})]:
+            bad = '<template data-mint="manifest">' + invalid + '</template>'
+            with patch('scripts.fetch_sources.urllib.request.urlopen', return_value=Response(bad.encode())):
+                self.assertEqual(fetch('moonshot_batch', self.cache)['status'], 'failed')
+            self.assertEqual({p.name: p.read_bytes() for p in folder.iterdir()}, before)
 
     def test_readable_sources_preserve_prices_and_discard_scripts(self):
         page = '<style>discard</style><table><tr><td>Model</td><td>$2</td></tr></table><script>discard</script>'

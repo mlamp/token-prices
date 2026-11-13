@@ -14,7 +14,7 @@
   "properties": {
     "schema_version": {
       "type": "integer",
-      "const": 2
+      "const": 3
     },
     "currency": {
       "type": "string",
@@ -135,7 +135,8 @@
         },
         "cache_write": {
           "type": "number",
-          "minimum": 0
+          "minimum": 0,
+          "description": "Default cache-write token price. Alternative to retention-specific prices, never additive. For OpenAI this is the 30-minute rate."
         },
         "cache_5m_write": {
           "type": "number",
@@ -144,6 +145,16 @@
         "cache_1h_write": {
           "type": "number",
           "minimum": 0
+        },
+        "cache_30m_write": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Cache-write token price for 30-minute retention; does not inherit from another rate."
+        },
+        "cache_12h_write": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Cache-write token price for 12-hour retention; does not inherit from another rate."
         }
       }
     },

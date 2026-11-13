@@ -15,7 +15,7 @@ def band(service='standard', lower=0, upper=None, pricing=None):
 
 
 def document():
-    return {'schema_version': 2, 'currency': 'USD', 'unit': 'usd_per_million_tokens',
+    return {'schema_version': 3, 'currency': 'USD', 'unit': 'usd_per_million_tokens',
             'updated_at': '2026-10-07T00:00:00Z',
             'models': [{'id': 'example', 'provider': 'openai',
                         'pricing': {'input': 2, 'output': 10},
@@ -76,9 +76,15 @@ class ValidationTests(unittest.TestCase):
             doc['models'][0]['pricing'] = pricing
             self.reject(doc, 'flat pricing must equal')
 
+    def test_default_and_30m_write_must_match(self):
+        doc = document()
+        for pricing in [doc['models'][0]['pricing'], doc['models'][0]['pricing_tiers'][0]['pricing']]:
+            pricing.update(cache_write=2.5, cache_30m_write=3)
+        self.reject(doc, 'default and 30m')
+
     def test_bad_prices_on_flat_and_tier(self):
         for field in ['input', 'output', 'cache_read', 'cache_write',
-                      'cache_5m_write', 'cache_1h_write']:
+                      'cache_5m_write', 'cache_1h_write', 'cache_30m_write', 'cache_12h_write']:
             for bad in [-1, True, None, '2', float('nan'), float('inf'), -float('inf')]:
                 for tier in [False, True]:
                     with self.subTest(field=field, bad=bad, tier=tier):
@@ -165,18 +171,53 @@ class CatalogTests(unittest.TestCase):
         check_shape(self.doc)
 
     def test_gpt_sol_standard_boundary_and_services(self):
-        short = {'input': 2, 'output': 10, 'cache_read': .1, 'cache_write': 2.5}
-        long = {'input': 4, 'output': 15, 'cache_read': .2, 'cache_write': 5}
+        short = {'input': 2, 'output': 10, 'cache_read': .1, 'cache_write': 2.5, 'cache_30m_write': 2.5, 'cache_12h_write': 5.0}
+        long = {'input': 4, 'output': 15, 'cache_read': .2, 'cache_write': 5, 'cache_30m_write': 5, 'cache_12h_write': 10.0}
         for count, expected in [(0, short), (272000, short), (272001, long), (1050000, long)]:
             self.assertEqual(self.select('gpt-6.1-sol', 'standard', count), expected)
         self.assertEqual(self.select('gpt-6.1-sol', 'batch', 272000),
-                         {'input': 1, 'output': 5, 'cache_read': .05, 'cache_write': 1.25})
+                         {'input': 1, 'output': 5, 'cache_read': .05, 'cache_write': 1.25, 'cache_30m_write': 1.25, 'cache_12h_write': 2.5})
         self.assertEqual(self.select('gpt-6.1-sol', 'batch', 272001)['output'], 7.5)
         self.assertEqual(self.select('gpt-6.1-sol', 'fast', 272000)['input'], 4)
         self.assertEqual(self.select('gpt-6.1-sol', 'ultrafast', 272000),
-                         {'input': 12, 'output': 60, 'cache_read': .6, 'cache_write': 15})
+                         {'input': 12, 'output': 60, 'cache_read': .6, 'cache_write': 15, 'cache_30m_write': 15, 'cache_12h_write': 30.0})
         self.assertEqual(self.select('gpt-6.1-sol', 'ultrafast', 272001),
-                         {'input': 24, 'output': 90, 'cache_read': 1.2, 'cache_write': 30})
+                         {'input': 24, 'output': 90, 'cache_read': 1.2, 'cache_write': 30, 'cache_30m_write': 30, 'cache_12h_write': 60.0})
+
+    def test_cyber_boundary_and_unpublished_rates(self):
+        self.assertEqual(self.select('gpt-6-cyber', 'standard', 272000),
+                         {'input': 20, 'output': 100, 'cache_read': 2,
+                          'cache_write': 25, 'cache_30m_write': 25, 'cache_12h_write': 50})
+        self.assertEqual(self.select('gpt-6-cyber', 'standard', 272001),
+                         {'input': 40, 'output': 150, 'cache_read': 4})
+        with self.assertRaises(StopIteration):
+            self.select('gpt-6-cyber', 'batch', 100)
+        self.assertIn('Daybreak Red', self.models['gpt-6-cyber']['notes'])
+
+    def test_november_13_aliases_and_service_prices(self):
+        aliases = {a: m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
+        self.assertEqual(aliases['fable[1m]'], 'claude-fable-5-2')
+        self.assertEqual(aliases['fable-5.1'], 'claude-fable-5-1')
+        self.assertEqual(aliases['gemini-4'], 'gemini-4-carbon')
+        self.assertEqual(self.models['claude-fable-5-1']['status'], 'legacy')
+        for family in ['fable', 'mythos']:
+            mid = 'claude-' + family + '-5-2'
+            self.assertEqual(self.models[mid]['context_window'], 1000000)
+            self.assertEqual(self.select(mid, 'standard', 1000000),
+                             {'input': 8, 'output': 40, 'cache_read': .2,
+                              'cache_5m_write': 10, 'cache_1h_write': 16})
+            self.assertEqual(self.select(mid, 'batch', 100)['cache_1h_write'], 8)
+            self.assertEqual(self.select(mid, 'fast', 100)['cache_read'], .4)
+        self.assertIn('verification', self.models['claude-mythos-5-2']['notes'])
+        for mid, price, cached in [('gemini-4-carbon', 4, .2), ('gemini-4-hydrogen', 1.5, .075)]:
+            self.assertEqual(self.models[mid]['context_window'], 1048576)
+            for service, factor in [('standard', 1), ('batch', .5), ('flex', .5), ('priority', 1.8)]:
+                self.assertEqual(self.select(mid, service, 1048576),
+                                 {'input': round(price*factor, 8), 'output': round(price*5*factor, 8),
+                                  'cache_read': round(cached*factor, 8)})
+        self.assertIn('2026-11-30', self.models['gemini-4-carbon']['notes'])
+        self.assertIn('fast-mode-2026-02-01', self.models['claude-opus-4-8']['notes'])
+        self.assertEqual(self.models['claude-opus-4-8']['status'], 'current')
 
     def test_missing_long_context_service_is_not_standard(self):
         self.assertEqual(self.select('gpt-5.5-pro', 'batch', 272000)['input'], 15)
@@ -188,11 +229,25 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(self.select('grok-4.7', 'standard', 200000),
                          {'input': 4, 'output': 12, 'cache_read': 1})
 
+    def test_november_additions_and_redirects(self):
+        aliases = {a: m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
+        self.assertEqual(aliases['terra'], 'gpt-6.1-terra')
+        self.assertEqual(aliases['gemini-3.5-flash'], 'gemini-3.6-flash')
+        self.assertEqual(aliases['gemini-3.7-flash'], 'gemini-3.8-flash')
+        terra = self.select('gpt-6.1-terra', 'standard', 272001)
+        self.assertEqual(terra['cache_12h_write'], 5)
+        self.assertEqual(terra['cache_read'], .1)
+        self.assertEqual(self.models['kimi-k3.1-pro-highspeed']['pricing']['cache_1h_write'], 8)
+        self.assertEqual(self.select('kimi-k3.1-pro', 'batch', 1048576)['cache_1h_write'], 2.4)
+        self.assertEqual(self.models['glm-5.3-flashx-legal']['pricing']['cache_read'], .075)
+        self.assertEqual(self.models['mistral-large-2512']['status'], 'legacy')
+        self.assertEqual(self.select('gemini-3.5-flash-lite', 'batch', 100)['cache_read'], .015)
+
     def test_google_batch_cache_is_independent(self):
         self.assertEqual(self.select('gemini-3.1-pro-preview', 'batch', 200000),
                          {'input': 1, 'output': 6, 'cache_read': .2})
         self.assertEqual(self.select('gemini-3.1-pro-preview', 'standard', 200001)['output'], 18)
-        self.assertEqual(self.select('gemini-3.5-flash', 'flex', 100)['cache_read'], .08)
+        self.assertEqual(self.select('gemini-3.5-flash-lite', 'flex', 100)['cache_read'], .02)
 
     def test_provider_coverage_and_verified_rates(self):
         self.assertEqual({m['provider'] for m in self.doc['models']},
@@ -200,7 +255,7 @@ class CatalogTests(unittest.TestCase):
                           'deepseek', 'qwen', 'zhipu', 'mistral', 'cohere'})
         expected = {'deepseek-v4.1-flash': (.3, 1.2, .006),
                     'claude-opus-5-5': (4, 20, .2),
-                    'mistral-large-4': (1.36, 4.18, .14),
+                    'mistral-large-4': (.7, 2.1, .07),
                     'glm-5.3': (1.4, 4.4, .26)}
         for mid, rates in expected.items():
             actual = self.models[mid]['pricing']
@@ -211,7 +266,7 @@ class CatalogTests(unittest.TestCase):
     def test_redirects_and_generic_aliases(self):
         aliases = {a.lower(): m['id'] for m in self.doc['models'] for a in m.get('aliases', [])}
         expected = {'sol': 'gpt-6.1-sol', 'opus': 'claude-opus-5-5',
-                    'sonnet': 'claude-sonnet-5-5', 'fable': 'claude-fable-5-1',
+                    'sonnet': 'claude-sonnet-5-5', 'fable': 'claude-fable-5-2',
                     'deepseek-v4-flash-vision-exp': 'deepseek-v4.1-flash',
                     'grok-code-fast-1': 'grok-build-0.1', 'grok-4-fast': 'grok-4.3',
                     'llama-4-maverick': 'gemma-4-31b-it'}
@@ -224,7 +279,7 @@ class CatalogTests(unittest.TestCase):
         expected = {
             'claude-opus-5', 'claude-opus-4-8', 'claude-sonnet-5',
             'claude-sonnet-4-6', 'claude-haiku-4-5-20251001',
-            'claude-fable-5', 'claude-fable-5-1',
+            'claude-fable-5', 'claude-fable-5-1', 'claude-fable-5-2', 'claude-mythos-5-2',
             'claude-opus-5-5', 'claude-sonnet-5-5', 'claude-haiku-5-5',
         }
         self.assertEqual({m['id'] for m in self.doc['models']
@@ -277,7 +332,7 @@ class CatalogTests(unittest.TestCase):
         model = self.models['kimi-k2.6']
         self.assertEqual(model['pricing'], {'input': .95, 'output': 4, 'cache_read': .16})
         self.assertEqual(self.select(model['id'], 'batch', 262144),
-                         {'input': .57, 'output': 2.4, 'cache_read': .096})
+                         {'input': .57, 'output': 2.4, 'cache_read': .1})
         highspeed = self.models['kimi-k2.7-code-highspeed']
         self.assertEqual(highspeed['pricing'], {'input': 1.9, 'output': 8, 'cache_read': .38})
         self.assertEqual(model['context_window'], 262144)

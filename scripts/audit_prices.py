@@ -34,36 +34,71 @@ def parse_openai(body: str) -> dict:
     if not match:
         raise ValueError('OpenAI short/long pricing boundary is missing or changed format')
     boundary = int(match[1]) * 1000
-    tables = re.findall(r'### (Standard|Batch|Flex|Fast|Ultrafast) pricing data\n(.*?)(?=###|\Z)', body, re.S)
-    if not tables or tables[0][0] != 'Standard':
-        raise ValueError('OpenAI complete service pricing tables are missing')
     result = {}
-    header = '| Model | Short context input | Short context cached input | Short context cache writes | Short context output | Long context input | Long context cached input | Long context cache writes | Long context output |'
-    for service, text in tables:
-        if header not in text:
-            raise ValueError('OpenAI pricing column layout changed')
-        for line in text.splitlines():
-            if not line.startswith('| ') or not re.match(r'\| (?:gpt-|o[0-9]|chat-)', line):
+    service = None
+    header = None
+    old = ['Short context input', 'Short context cached input', 'Short context cache writes', 'Short context output', 'Long context input', 'Long context cached input', 'Long context cache writes', 'Long context output']
+    new = [prefix + field for prefix in ['Short context ', 'Long context ']
+           for field in ['input', 'output', 'cached input', '30m write', '12h write']]
+    simple = ['Input', 'Output', 'Cached input']
+    for line in body.splitlines():
+        if line.startswith('### '):
+            match_service = re.fullmatch(r'### (Standard|Batch|Flex|Fast|Ultrafast) pricing data', line)
+            service = match_service[1].lower() if match_service else None
+            header = None
+        if line in ['#### Batch', '#### Flex'] and service in ['batch', 'flex']:
+            service = line[5:].lower()
+            header = None
+        if not service or not line.startswith('| '):
+            continue
+        cells = [part.strip() for part in line.split('|')[1:-1]]
+        if cells[0] == 'Model':
+            header = cells[1:]
+            if header not in [old, new, simple]:
+                raise ValueError('OpenAI pricing column layout changed')
+            continue
+        if not re.match(r'^(?:gpt-|o[0-9]|chat-)', cells[0]):
+            continue
+        if header is None or len(cells) != len(header) + 1:
+            raise ValueError('OpenAI pricing table column count changed')
+        mid = cells[0].split(' ')[0]
+        values = dict(zip(header, [rate(cell) for cell in cells[1:]]))
+        long_priced = values.get('Long context input') is not None
+        if header == simple:
+            bands = [('', 0, None)]
+        else:
+            bands = [('Short context ', 0, boundary), ('Long context ', boundary + 1, None)]
+        for prefix, lower, upper in bands:
+            names = [('input', 'input'), ('output', 'output'), ('cached input', 'cache_read'),
+                     ('cache writes', 'cache_write'), ('30m write', 'cache_30m_write'),
+                     ('12h write', 'cache_12h_write')]
+            if not prefix:
+                names = [('Input', 'input'), ('Output', 'output'), ('Cached input', 'cache_read')]
+            pricing = {field: values[prefix + name] for name, field in names
+                       if values.get(prefix + name) is not None}
+            if not pricing:
                 continue
-            columns = [part.strip() for part in line.split('|')[1:-1]]
-            if len(columns) != 9:
-                raise ValueError('OpenAI pricing table column count changed')
-            mid = columns[0].split(' ')[0]
-            values = [rate(cell) for cell in columns[1:]]
-            if values[0] is None or values[3] is None:
-                raise ValueError(f'{mid}: incomplete short-context input/output rates')
-            long_priced = values[4] is not None and values[7] is not None
-            short_only = not long_priced and any(t['input_tokens_min'] > 0 for t in result.get(mid, []))
-            for offset, lower, upper in [(0, 0, boundary if long_priced or short_only else None),
-                                         (4, boundary + 1, None)]:
-                if values[offset] is None and values[offset + 3] is None:
-                    continue
-                if values[offset] is None or values[offset + 3] is None:
-                    raise ValueError(f'{mid}: incomplete context pricing band')
-                pricing = {field: values[offset + i] for i, field in enumerate(
-                    ['input', 'cache_read', 'cache_write', 'output']) if values[offset + i] is not None}
-                result.setdefault(mid, []).append({'service_tier': service.lower(),
-                    'input_tokens_min': lower, 'input_tokens_max': upper, 'pricing': pricing})
+            if 'input' not in pricing or 'output' not in pricing:
+                raise ValueError(f'{mid}: incomplete context pricing band')
+            if 'cache_30m_write' in pricing:
+                pricing['cache_write'] = pricing['cache_30m_write']
+            if prefix and lower == 0 and not long_priced:
+                upper = None
+            tier = {'service_tier': service, 'input_tokens_min': lower,
+                    'input_tokens_max': upper, 'pricing': pricing}
+            existing = result.setdefault(mid, [])
+            same = [t for t in existing if t['service_tier'] == service
+                    and t['input_tokens_min'] == lower]
+            if same and same != [tier]:
+                raise ValueError(f'{mid}: conflicting repeated pricing row')
+            if not same:
+                existing.append(tier)
+    # Services without a long band stop at the model's documented pricing boundary.
+    for tiers in result.values():
+        if any(t['input_tokens_min'] > 0 for t in tiers):
+            for tier in tiers:
+                if tier['input_tokens_min'] == 0:
+                    tier['input_tokens_max'] = boundary
     if not result:
         raise ValueError('OpenAI tables contain no recognized models')
     return result

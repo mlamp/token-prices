@@ -39,6 +39,29 @@ class AuditTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     parse_openai(body)
 
+    def test_retention_layout_nested_flex_and_repeated_rows(self):
+        header = '| Model | ' + ' | '.join(prefix + name
+            for prefix in ['Short context ', 'Long context ']
+            for name in ['input', 'output', 'cached input', '30m write', '12h write']) + ' |'
+        row = '| gpt-example | $1 | $5 | $0.05 | $1.25 | $2.50 | $2 | $7.50 | $0.10 | $2.50 | $5 |'
+        body = '### Standard pricing data\n' + header + '\n' + row
+        body += '\n### Standard pricing data\n' + header + '\n' + row
+        body += '\n### Batch pricing data\n#### Flex\n' + header + '\n' + row
+        body += '\nShort context: ≤272K input tokens. Long context: >272K input tokens.'
+        tiers = parse_openai(body)['gpt-example']
+        self.assertEqual(len(tiers), 4)
+        self.assertEqual(tiers[0]['pricing']['cache_write'], 1.25)
+        self.assertEqual(tiers[1]['pricing']['cache_12h_write'], 5)
+        self.assertEqual(tiers[2]['service_tier'], 'flex')
+        with self.assertRaises(ValueError):
+            parse_openai(body.replace(row, row.replace('$1 |', '$3 |'), 1))
+
+    def test_unbanded_table_has_no_inferred_cache(self):
+        body = OPENAI + '\n### Standard pricing data\n| Model | Input | Output | Cached input |\n| gpt-simple | $1 | $5 | - |\n'
+        tier = parse_openai(body)['gpt-simple'][0]
+        self.assertIsNone(tier['input_tokens_max'])
+        self.assertEqual(tier['pricing'], {'input': 1, 'output': 5})
+
     def test_hosted_units_cache_and_service_factors(self):
         expected = hosted_candidate(HOST)
         self.assertEqual(expected['pricing'], {'input': .1, 'output': .32, 'cache_read': .05})
