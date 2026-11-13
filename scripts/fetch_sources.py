@@ -18,7 +18,8 @@ SOURCES = {
     'anthropic': 'https://platform.claude.com/docs/en/about-claude/pricing',
     'google': 'https://ai.google.dev/gemini-api/docs/pricing',
     'xai': 'https://docs.x.ai/developers/models',
-    'moonshot': 'https://platform.kimi.ai/docs/pricing/chat.md',
+    'moonshot': 'https://platform.kimi.ai/docs/pricing/chat',
+    'moonshot_batch': 'https://platform.kimi.ai/docs/pricing/batch',
     'deepseek': 'https://api-docs.deepseek.com/quick_start/pricing/',
     'qwen': 'https://www.alibabacloud.com/help/en/model-studio/model-pricing',
     'zhipu': 'https://docs.z.ai/guides/overview/pricing.md',
@@ -65,6 +66,44 @@ def readable(body: str, content_type: str) -> str:
     return body
 
 
+def kimi_tables(body: str) -> str:
+    """Read only literal model/price cells from published compiled MDX; never evaluate it."""
+    tables = []
+    sources = []
+    for manifest in re.findall(r'<template\b[^>]*data-mint="manifest"[^>]*>(.*?)</template>', body, re.S):
+        try:
+            code = json.loads(manifest)['page']['mdx']['mdxSource']['compiledSource']
+        except (ValueError, KeyError, TypeError) as exc:
+            raise ValueError('Kimi manifest layout changed') from exc
+        if not isinstance(code, str):
+            raise ValueError('Kimi compiled source must be text')
+        sources.append(code)
+    for match in re.finditer(r'self\.__next_f\.push\(', body):
+        try:
+            payload, _ = json.JSONDecoder().raw_decode(body[match.end():])
+        except ValueError:
+            continue
+        if not isinstance(payload, list) or len(payload) != 2 or not isinstance(payload[1], str):
+            continue
+        sources.append(payload[1])
+    for code in sources:
+        for table in re.findall(r'rows:(\[\[.*?\]\])', code, re.S):
+            if 'kimi-k' not in table:
+                continue
+            rows = []
+            for row in table[2:-2].split('],['):
+                model = re.search(r'(?:children:|^)`(kimi-[a-z0-9.\-]+)`', row)
+                prices = re.findall(r'`(\$[0-9]+(?:\.[0-9]+)? / MTok|—)`', row)
+                if not model or len(prices) not in [3, 5]:
+                    raise ValueError('Kimi price table layout changed')
+                rows.append(' | '.join([model[1]] + prices))
+            tables.append('\n'.join(rows))
+    tables = list(dict.fromkeys(tables))
+    if not tables:
+        raise ValueError('Kimi price table literals missing')
+    return '\n\n'.join(tables) + '\n'
+
+
 def fetch(name: str, cache: Path, force: bool = False) -> dict:
     url = SOURCES[name]
     folder = cache / name
@@ -84,6 +123,8 @@ def fetch(name: str, cache: Path, force: bool = False) -> dict:
             body = response.read().decode('utf-8')
             content_type = response.headers.get('Content-Type', '')
             text = readable(body, content_type)
+            if name in {'moonshot', 'moonshot_batch'}:
+                text += '\nPublished table literals (input | output | cached input | 5m write | 1h write):\n' + kimi_tables(body)
             digest = hashlib.sha256(text.encode()).hexdigest()
             metadata = {'url': url, 'resolved_url': response.geturl(), 'checked_at': checked_at,
                         'sha256': digest, 'etag': response.headers.get('ETag'),

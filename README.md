@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/mlamp/token-prices/v0.2.1/prices/current.json
 
 [Schema for v0.2.1](https://raw.githubusercontent.com/mlamp/token-prices/v0.2.1/schema/token-prices.schema.json).
 
-Moving catalog on `main` (schema v2, may change without a tag):
+Moving catalog on `main` (schema v3, may change without a tag):
 
 ```text
 https://raw.githubusercontent.com/mlamp/token-prices/main/prices/current.json
@@ -36,9 +36,9 @@ Historical catalogs are not updated.
 ## Freshness
 
 <!-- generated:freshness:start -->
-Catalog edited: `2026-10-14T14:43:03Z`.
+Catalog edited: `2026-11-13T10:08:59Z`.
 
-77 models across 11 providers. Model `as_of` dates range from `2026-09-01` to `2026-10-14`.
+84 models across 11 providers. Model `as_of` dates range from `2026-09-01` to `2026-11-13`.
 
 `current.json` is the moving catalog, not a promise that every price was verified today.
 Check each model's `as_of` date, `status`, notes and [source provenance](prices/sources.md).
@@ -48,11 +48,11 @@ Check each model's `as_of` date, `status`, notes and [source provenance](prices/
 
 Each model has an `id`, a `provider`, and `pricing.input` / `pricing.output`. Optional
 fields add `aliases`, `context_window`, cache rates (`cache_read`, `cache_write`,
-`cache_5m_write`, `cache_1h_write`) and `pricing_tiers`. The
+`cache_5m_write`, `cache_1h_write`, `cache_30m_write`, `cache_12h_write`) and `pricing_tiers`. The
 [schema](schema/token-prices.schema.json) has the full definition.
 
 <!-- generated:schema-version:start -->
-`schema_version` is `2`. `status` is `current` | `legacy` | `preview`.
+`schema_version` is `3`. `status` is `current` | `legacy` | `preview`.
 <!-- generated:schema-version:end -->
 
 - Prices use regular list rates where available. Notes explain promotions, regional
@@ -63,6 +63,10 @@ fields add `aliases`, `context_window`, cache rates (`cache_read`, `cache_write`
   with failed verification retain their earlier dates and explain the gap in notes.
 - A missing cache rate means unknown or unavailable, never free. Cache rates do
   not inherit from flat pricing or another tier.
+
+OpenAI `cache_write` is the default 30-minute write rate. `cache_30m_write` and
+`cache_12h_write` give retention-specific alternatives. Choose one write rate; do not
+add them together. Schema v2 remains pinned at v0.2.1.
 
 ### Tiered pricing
 

@@ -128,6 +128,10 @@ def check_shape(doc: dict) -> None:
             if key in aliases and aliases[key] != mid:
                 fail(f"alias {alias!r} claimed by {aliases[key]} and {mid}")
             aliases[key] = mid
+        for pricing in [model['pricing']] + [t['pricing'] for t in model.get('pricing_tiers', [])]:
+            if 'cache_write' in pricing and 'cache_30m_write' in pricing:
+                if pricing['cache_write'] != pricing['cache_30m_write']:
+                    fail(f"{mid}: default and 30m cache-write prices must match")
         if "pricing_tiers" not in model:
             continue
         standard = [t for t in model["pricing_tiers"]
